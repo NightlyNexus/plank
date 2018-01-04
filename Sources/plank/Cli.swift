@@ -40,14 +40,15 @@ enum FlagOptions: String {
 extension FlagOptions: HelpCommandOutput {
     internal static func printHelp() -> String {
         return [
-            "    --\(FlagOptions.objectiveCClassPrefix.rawValue) - The prefix to add to all generated class names.",
             "    --\(FlagOptions.outputDirectory.rawValue) - The directory where generated code will be written.",
             "    --\(FlagOptions.printDeps.rawValue) - Just print the path to the dependent schemas necessary to generate the schemas provided and exit.",
             "    --\(FlagOptions.noRecursive.rawValue) - Don't generate files recursively. Only generate the one file I ask for.",
             "    --\(FlagOptions.onlyRuntime.rawValue) - Only generate runtime files and exit.",
             "    --\(FlagOptions.indent.rawValue) - Define a custom indentation.",
             "    --\(FlagOptions.lang.rawValue) - Comma separated list of target language(s) for generating code. Default: \"objc\"",
-            "    --\(FlagOptions.help.rawValue) - Show this text and exit."
+            "    --\(FlagOptions.help.rawValue) - Show this text and exit.",
+            "Objective-C:",
+            "    --\(FlagOptions.objectiveCClassPrefix.rawValue) - The prefix to add to all generated class names."
         ].joined(separator: "\n")
     }
 }
