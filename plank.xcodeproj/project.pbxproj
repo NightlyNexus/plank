@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		814CB1931FFF6083004125D5 /* JavaIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814CB1921FFF6083004125D5 /* JavaIR.swift */; };
+		814CB1951FFF6096004125D5 /* JavaModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814CB1941FFF6096004125D5 /* JavaModelRenderer.swift */; };
 		OBJ_100 /* ObjectiveCFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ObjectiveCFileGenerator.swift */; };
 		OBJ_101 /* ObjectiveCIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ObjectiveCIR.swift */; };
 		OBJ_102 /* ObjectiveCInitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* ObjectiveCInitExtension.swift */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		814CB1921FFF6083004125D5 /* JavaIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaIR.swift; sourceTree = "<group>"; };
+		814CB1941FFF6096004125D5 /* JavaModelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaModelRenderer.swift; sourceTree = "<group>"; };
 		OBJ_10 /* JSADTExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSADTExtension.swift; sourceTree = "<group>"; };
 		OBJ_11 /* JSFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSFileGenerator.swift; sourceTree = "<group>"; };
 		OBJ_12 /* JSFileRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSFileRenderer.swift; sourceTree = "<group>"; };
@@ -224,7 +228,6 @@
 				OBJ_13 /* JSIR.swift */,
 				OBJ_14 /* JSModelRenderer.swift */,
 				OBJ_15 /* JSRuntimeFile.swift */,
-				OBJ_16 /* JavaFileGenerator.swift */,
 				OBJ_17 /* ObjCADTRenderer.swift */,
 				OBJ_18 /* ObjCFileRenderer.swift */,
 				OBJ_19 /* ObjCModelRenderer.swift */,
@@ -239,6 +242,9 @@
 				OBJ_28 /* Schema.swift */,
 				OBJ_29 /* SchemaLoader.swift */,
 				OBJ_30 /* StringExtensions.swift */,
+				OBJ_16 /* JavaFileGenerator.swift */,
+				814CB1921FFF6083004125D5 /* JavaIR.swift */,
+				814CB1941FFF6096004125D5 /* JavaModelRenderer.swift */,
 			);
 			name = Core;
 			path = Sources/Core;
@@ -387,6 +393,7 @@
 				OBJ_94 /* ObjCFileRenderer.swift in Sources */,
 				OBJ_95 /* ObjCModelRenderer.swift in Sources */,
 				OBJ_96 /* ObjectiveCBuilderExtension.swift in Sources */,
+				814CB1951FFF6096004125D5 /* JavaModelRenderer.swift in Sources */,
 				OBJ_97 /* ObjectiveCDebugExtension.swift in Sources */,
 				OBJ_98 /* ObjectiveCDictionaryExtension.swift in Sources */,
 				OBJ_99 /* ObjectiveCEqualityExtension.swift in Sources */,
@@ -396,6 +403,7 @@
 				OBJ_103 /* ObjectiveCNSCodingExtension.swift in Sources */,
 				OBJ_104 /* Schema.swift in Sources */,
 				OBJ_105 /* SchemaLoader.swift in Sources */,
+				814CB1931FFF6083004125D5 /* JavaIR.swift in Sources */,
 				OBJ_106 /* StringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

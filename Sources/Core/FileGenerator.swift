@@ -18,6 +18,7 @@ public enum GenerationParameterType {
     case recursive
     case includeRuntime
     case indent
+    case packageName
 }
 
 public enum Languages: String {
@@ -35,6 +36,19 @@ public protocol FileGenerator {
     func renderFile() -> String
     var fileName: String { mutating get }
     var indent: Int { get }
+}
+
+
+protocol RootRenderer {
+    func renderImplementation() -> [String]
+}
+
+protocol FileRenderer {
+    associatedtype Root: RootRenderer
+    var rootSchema: SchemaObjectRoot { get }
+    var params: GenerationParameters { get }
+
+    func renderRoots() -> [Root]
 }
 
 // Currently not usable until upgrading the Swift Toolchain on CI

@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol ObjCFileRenderer {
-    var rootSchema: SchemaObjectRoot { get }
-    var params: GenerationParameters { get }
-
-    func renderRoots() -> [ObjCIR.Root]
+protocol ObjCFileRenderer: FileRenderer {
 }
 
 extension ObjCFileRenderer {

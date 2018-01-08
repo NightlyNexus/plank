@@ -287,7 +287,7 @@ public struct ObjCIR {
         }
     }
 
-    enum Root {
+    enum Root: RootRenderer {
         case structDecl(name: String, fields: [String])
         case imports(classNames: Set<String>, myName: String, parentName: String?)
         case category(className: String, categoryName: String?, methods: [ObjCIR.Method],

@@ -10,7 +10,9 @@ import Foundation
 struct JavaGeneratorManager: FileGeneratorManager {
 
     static func filesToGenerate(descriptor: SchemaObjectRoot, generatorParameters: GenerationParameters) -> [FileGenerator] {
-        return []
+        return [
+            JavaFileGenerator(className: descriptor.className(with: generatorParameters))
+        ]
     }
 
     static func runtimeFiles() -> [FileGenerator] {
@@ -23,11 +25,12 @@ struct JavaFileGenerator: FileGenerator {
     let className: String
 
     var fileName: String {
-        return "\(className).h"
+        return "\(className).java"
     }
 
     func renderFile() -> String {
-        return ""
+        // TODO: Update this
+        return self.renderCommentHeader()
     }
 
     var indent: Int {
