@@ -369,7 +369,11 @@ public struct ObjCIR {
                 // skip macro in impl
                 return []
             case .imports(let classNames, let myName, _):
-                return [classNames.union(Set([myName])).sorted().map(ObjCIR.fileImportStmt).joined(separator: "\n")]
+                return [classNames.union(Set([myName]))
+                    .sorted()
+                    .map { $0.trimmingCharacters(in: .whitespaces) }
+                    .map(ObjCIR.fileImportStmt)
+                    .joined(separator: "\n")]
             case .classDecl(name: let className, extends: _, methods: let methods, properties: _, protocols: let protocols):
                 return [
                     "@implementation \(className)",
