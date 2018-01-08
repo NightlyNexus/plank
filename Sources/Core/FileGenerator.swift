@@ -38,7 +38,6 @@ public protocol FileGenerator {
     var indent: Int { get }
 }
 
-
 protocol RootRenderer {
     func renderImplementation() -> [String]
 }
@@ -47,8 +46,52 @@ protocol FileRenderer {
     associatedtype Root: RootRenderer
     var rootSchema: SchemaObjectRoot { get }
     var params: GenerationParameters { get }
-
+    func typeFromSchema(_ param: String, _ schema: Schema) -> String
     func renderRoots() -> [Root]
+}
+
+extension FileRenderer {
+    var className: String {
+        return self.rootSchema.className(with: self.params)
+    }
+
+    var parentDescriptor: Schema? {
+        return self.rootSchema.extends.flatMap { $0.force() }
+    }
+
+    var properties: [(Parameter, SchemaObjectProperty)] {
+        return self.rootSchema.properties.map { $0 }
+    }
+
+    var isBaseClass: Bool {
+        return rootSchema.extends == nil
+    }
+
+    fileprivate func referencedClassNames(schema: Schema) -> [String] {
+        switch schema {
+        case .reference(with: let ref):
+            switch ref.force() {
+            case .some(.object(_)):
+                return [typeFromSchema("", schema)]
+            default:
+                fatalError("Bad reference found in schema for class: \(self.className)")
+            }
+        case .object(let schemaRoot):
+            return [schemaRoot.className(with: self.params)]
+        case .map(valueType: .some(let valueType)):
+            return referencedClassNames(schema: valueType)
+        case .array(itemType: .some(let itemType)), .set(itemType: .some(let itemType)):
+            return referencedClassNames(schema: itemType)
+        case .oneOf(types: let itemTypes):
+            return itemTypes.flatMap(referencedClassNames)
+        default:
+            return []
+        }
+    }
+
+    func renderReferencedClasses() -> Set<String> {
+        return Set(rootSchema.properties.values.map { $0.schema }.flatMap(referencedClassNames))
+    }
 }
 
 // Currently not usable until upgrading the Swift Toolchain on CI

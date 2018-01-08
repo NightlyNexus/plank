@@ -21,6 +21,7 @@ ROOT_DIR="${PWD}"
 
 # Verify flow types
 if [ -x "$(command -v flow)" ]; then
+  echo "Verify flow types"
   cd Examples/JS/flow
   flow
   cd "${ROOT_DIR}"

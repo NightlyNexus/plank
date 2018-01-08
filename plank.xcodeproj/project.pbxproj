@@ -9,11 +9,11 @@
 /* Begin PBXAggregateTarget section */
 		"plank::plankPackageTests::ProductTarget" /* plankPackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_109 /* Build configuration list for PBXAggregateTarget "plankPackageTests" */;
+			buildConfigurationList = OBJ_113 /* Build configuration list for PBXAggregateTarget "plankPackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_112 /* PBXTargetDependency */,
+				OBJ_116 /* PBXTargetDependency */,
 			);
 			name = plankPackageTests;
 			productName = plankPackageTests;
@@ -21,59 +21,59 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		814CB1931FFF6083004125D5 /* JavaIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814CB1921FFF6083004125D5 /* JavaIR.swift */; };
-		814CB1951FFF6096004125D5 /* JavaModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814CB1941FFF6096004125D5 /* JavaModelRenderer.swift */; };
-		OBJ_100 /* ObjectiveCFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ObjectiveCFileGenerator.swift */; };
-		OBJ_101 /* ObjectiveCIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ObjectiveCIR.swift */; };
-		OBJ_102 /* ObjectiveCInitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* ObjectiveCInitExtension.swift */; };
-		OBJ_103 /* ObjectiveCNSCodingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ObjectiveCNSCodingExtension.swift */; };
-		OBJ_104 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Schema.swift */; };
-		OBJ_105 /* SchemaLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* SchemaLoader.swift */; };
-		OBJ_106 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* StringExtensions.swift */; };
-		OBJ_55 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_61 /* Cli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Cli.swift */; };
-		OBJ_62 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* main.swift */; };
-		OBJ_64 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "plank::Core::Product" /* Core.framework */; };
-		OBJ_72 /* LinuxTestIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* LinuxTestIndex.swift */; };
-		OBJ_73 /* MockSchemaLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* MockSchemaLoader.swift */; };
-		OBJ_74 /* ObjectiveCIRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ObjectiveCIRTests.swift */; };
-		OBJ_75 /* ObjectiveCInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* ObjectiveCInitTests.swift */; };
-		OBJ_76 /* PlankTestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* PlankTestExtension.swift */; };
-		OBJ_77 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* StringExtensionsTests.swift */; };
-		OBJ_79 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "plank::Core::Product" /* Core.framework */; };
-		OBJ_85 /* FileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* FileGenerator.swift */; };
-		OBJ_86 /* JSADTExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* JSADTExtension.swift */; };
-		OBJ_87 /* JSFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* JSFileGenerator.swift */; };
-		OBJ_88 /* JSFileRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* JSFileRenderer.swift */; };
-		OBJ_89 /* JSIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* JSIR.swift */; };
-		OBJ_90 /* JSModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* JSModelRenderer.swift */; };
-		OBJ_91 /* JSRuntimeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* JSRuntimeFile.swift */; };
-		OBJ_92 /* JavaFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* JavaFileGenerator.swift */; };
-		OBJ_93 /* ObjCADTRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* ObjCADTRenderer.swift */; };
-		OBJ_94 /* ObjCFileRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* ObjCFileRenderer.swift */; };
-		OBJ_95 /* ObjCModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* ObjCModelRenderer.swift */; };
-		OBJ_96 /* ObjectiveCBuilderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ObjectiveCBuilderExtension.swift */; };
-		OBJ_97 /* ObjectiveCDebugExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* ObjectiveCDebugExtension.swift */; };
-		OBJ_98 /* ObjectiveCDictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ObjectiveCDictionaryExtension.swift */; };
-		OBJ_99 /* ObjectiveCEqualityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ObjectiveCEqualityExtension.swift */; };
+		OBJ_100 /* ObjectiveCBuilderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ObjectiveCBuilderExtension.swift */; };
+		OBJ_101 /* ObjectiveCDebugExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ObjectiveCDebugExtension.swift */; };
+		OBJ_102 /* ObjectiveCDictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ObjectiveCDictionaryExtension.swift */; };
+		OBJ_103 /* ObjectiveCEqualityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ObjectiveCEqualityExtension.swift */; };
+		OBJ_104 /* ObjectiveCFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* ObjectiveCFileGenerator.swift */; };
+		OBJ_105 /* ObjectiveCIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ObjectiveCIR.swift */; };
+		OBJ_106 /* ObjectiveCInitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ObjectiveCInitExtension.swift */; };
+		OBJ_107 /* ObjectiveCNSCodingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* ObjectiveCNSCodingExtension.swift */; };
+		OBJ_108 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Schema.swift */; };
+		OBJ_109 /* SchemaLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* SchemaLoader.swift */; };
+		OBJ_110 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* StringExtensions.swift */; };
+		OBJ_57 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_63 /* Cli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Cli.swift */; };
+		OBJ_64 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* main.swift */; };
+		OBJ_66 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "plank::Core::Product" /* Core.framework */; };
+		OBJ_74 /* LinuxTestIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* LinuxTestIndex.swift */; };
+		OBJ_75 /* MockSchemaLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* MockSchemaLoader.swift */; };
+		OBJ_76 /* ObjectiveCIRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* ObjectiveCIRTests.swift */; };
+		OBJ_77 /* ObjectiveCInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* ObjectiveCInitTests.swift */; };
+		OBJ_78 /* PlankTestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* PlankTestExtension.swift */; };
+		OBJ_79 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* StringExtensionsTests.swift */; };
+		OBJ_81 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "plank::Core::Product" /* Core.framework */; };
+		OBJ_87 /* FileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* FileGenerator.swift */; };
+		OBJ_88 /* JSADTExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* JSADTExtension.swift */; };
+		OBJ_89 /* JSFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* JSFileGenerator.swift */; };
+		OBJ_90 /* JSFileRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* JSFileRenderer.swift */; };
+		OBJ_91 /* JSIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* JSIR.swift */; };
+		OBJ_92 /* JSModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* JSModelRenderer.swift */; };
+		OBJ_93 /* JSRuntimeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* JSRuntimeFile.swift */; };
+		OBJ_94 /* JavaFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* JavaFileGenerator.swift */; };
+		OBJ_95 /* JavaIR.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* JavaIR.swift */; };
+		OBJ_96 /* JavaModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* JavaModelRenderer.swift */; };
+		OBJ_97 /* ObjCADTRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* ObjCADTRenderer.swift */; };
+		OBJ_98 /* ObjCFileRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ObjCFileRenderer.swift */; };
+		OBJ_99 /* ObjCModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* ObjCModelRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		814CB18F1FFED24D004125D5 /* PBXContainerItemProxy */ = {
+		812445EF2004008C006DA59D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "plank::Core";
 			remoteInfo = Core;
 		};
-		814CB1901FFED24D004125D5 /* PBXContainerItemProxy */ = {
+		812445F02004008C006DA59D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "plank::Core";
 			remoteInfo = Core;
 		};
-		814CB1911FFED24D004125D5 /* PBXContainerItemProxy */ = {
+		812445F12004008D006DA59D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -83,8 +83,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		814CB1921FFF6083004125D5 /* JavaIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaIR.swift; sourceTree = "<group>"; };
-		814CB1941FFF6096004125D5 /* JavaModelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaModelRenderer.swift; sourceTree = "<group>"; };
 		OBJ_10 /* JSADTExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSADTExtension.swift; sourceTree = "<group>"; };
 		OBJ_11 /* JSFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSFileGenerator.swift; sourceTree = "<group>"; };
 		OBJ_12 /* JSFileRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSFileRenderer.swift; sourceTree = "<group>"; };
@@ -92,32 +90,34 @@
 		OBJ_14 /* JSModelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSModelRenderer.swift; sourceTree = "<group>"; };
 		OBJ_15 /* JSRuntimeFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSRuntimeFile.swift; sourceTree = "<group>"; };
 		OBJ_16 /* JavaFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaFileGenerator.swift; sourceTree = "<group>"; };
-		OBJ_17 /* ObjCADTRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCADTRenderer.swift; sourceTree = "<group>"; };
-		OBJ_18 /* ObjCFileRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCFileRenderer.swift; sourceTree = "<group>"; };
-		OBJ_19 /* ObjCModelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCModelRenderer.swift; sourceTree = "<group>"; };
-		OBJ_20 /* ObjectiveCBuilderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCBuilderExtension.swift; sourceTree = "<group>"; };
-		OBJ_21 /* ObjectiveCDebugExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCDebugExtension.swift; sourceTree = "<group>"; };
-		OBJ_22 /* ObjectiveCDictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCDictionaryExtension.swift; sourceTree = "<group>"; };
-		OBJ_23 /* ObjectiveCEqualityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCEqualityExtension.swift; sourceTree = "<group>"; };
-		OBJ_24 /* ObjectiveCFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCFileGenerator.swift; sourceTree = "<group>"; };
-		OBJ_25 /* ObjectiveCIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCIR.swift; sourceTree = "<group>"; };
-		OBJ_26 /* ObjectiveCInitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCInitExtension.swift; sourceTree = "<group>"; };
-		OBJ_27 /* ObjectiveCNSCodingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCNSCodingExtension.swift; sourceTree = "<group>"; };
-		OBJ_28 /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
-		OBJ_29 /* SchemaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaLoader.swift; sourceTree = "<group>"; };
-		OBJ_30 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		OBJ_32 /* Cli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cli.swift; sourceTree = "<group>"; };
-		OBJ_33 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		OBJ_36 /* LinuxTestIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxTestIndex.swift; sourceTree = "<group>"; };
-		OBJ_37 /* MockSchemaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSchemaLoader.swift; sourceTree = "<group>"; };
-		OBJ_38 /* ObjectiveCIRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCIRTests.swift; sourceTree = "<group>"; };
-		OBJ_39 /* ObjectiveCInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCInitTests.swift; sourceTree = "<group>"; };
-		OBJ_40 /* PlankTestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankTestExtension.swift; sourceTree = "<group>"; };
-		OBJ_41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
-		OBJ_42 /* CI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CI; sourceTree = SOURCE_ROOT; };
-		OBJ_43 /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = SOURCE_ROOT; };
-		OBJ_44 /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = SOURCE_ROOT; };
-		OBJ_45 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Utility; sourceTree = SOURCE_ROOT; };
+		OBJ_17 /* JavaIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaIR.swift; sourceTree = "<group>"; };
+		OBJ_18 /* JavaModelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaModelRenderer.swift; sourceTree = "<group>"; };
+		OBJ_19 /* ObjCADTRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCADTRenderer.swift; sourceTree = "<group>"; };
+		OBJ_20 /* ObjCFileRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCFileRenderer.swift; sourceTree = "<group>"; };
+		OBJ_21 /* ObjCModelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjCModelRenderer.swift; sourceTree = "<group>"; };
+		OBJ_22 /* ObjectiveCBuilderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCBuilderExtension.swift; sourceTree = "<group>"; };
+		OBJ_23 /* ObjectiveCDebugExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCDebugExtension.swift; sourceTree = "<group>"; };
+		OBJ_24 /* ObjectiveCDictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCDictionaryExtension.swift; sourceTree = "<group>"; };
+		OBJ_25 /* ObjectiveCEqualityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCEqualityExtension.swift; sourceTree = "<group>"; };
+		OBJ_26 /* ObjectiveCFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCFileGenerator.swift; sourceTree = "<group>"; };
+		OBJ_27 /* ObjectiveCIR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCIR.swift; sourceTree = "<group>"; };
+		OBJ_28 /* ObjectiveCInitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCInitExtension.swift; sourceTree = "<group>"; };
+		OBJ_29 /* ObjectiveCNSCodingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCNSCodingExtension.swift; sourceTree = "<group>"; };
+		OBJ_30 /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
+		OBJ_31 /* SchemaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaLoader.swift; sourceTree = "<group>"; };
+		OBJ_32 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		OBJ_34 /* Cli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cli.swift; sourceTree = "<group>"; };
+		OBJ_35 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		OBJ_38 /* LinuxTestIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxTestIndex.swift; sourceTree = "<group>"; };
+		OBJ_39 /* MockSchemaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSchemaLoader.swift; sourceTree = "<group>"; };
+		OBJ_40 /* ObjectiveCIRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCIRTests.swift; sourceTree = "<group>"; };
+		OBJ_41 /* ObjectiveCInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveCInitTests.swift; sourceTree = "<group>"; };
+		OBJ_42 /* PlankTestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankTestExtension.swift; sourceTree = "<group>"; };
+		OBJ_43 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		OBJ_44 /* CI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CI; sourceTree = SOURCE_ROOT; };
+		OBJ_45 /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = SOURCE_ROOT; };
+		OBJ_46 /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = SOURCE_ROOT; };
+		OBJ_47 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Utility; sourceTree = SOURCE_ROOT; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* FileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileGenerator.swift; sourceTree = "<group>"; };
 		"plank::Core::Product" /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,65 +126,65 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_107 /* Frameworks */ = {
+		OBJ_111 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_63 /* Frameworks */ = {
+		OBJ_65 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_64 /* Core.framework in Frameworks */,
+				OBJ_66 /* Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_78 /* Frameworks */ = {
+		OBJ_80 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_79 /* Core.framework in Frameworks */,
+				OBJ_81 /* Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_31 /* plank */ = {
+		OBJ_33 /* plank */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_32 /* Cli.swift */,
-				OBJ_33 /* main.swift */,
+				OBJ_34 /* Cli.swift */,
+				OBJ_35 /* main.swift */,
 			);
 			name = plank;
 			path = Sources/plank;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_34 /* Tests */ = {
+		OBJ_36 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_35 /* CoreTests */,
+				OBJ_37 /* CoreTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_35 /* CoreTests */ = {
+		OBJ_37 /* CoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_36 /* LinuxTestIndex.swift */,
-				OBJ_37 /* MockSchemaLoader.swift */,
-				OBJ_38 /* ObjectiveCIRTests.swift */,
-				OBJ_39 /* ObjectiveCInitTests.swift */,
-				OBJ_40 /* PlankTestExtension.swift */,
-				OBJ_41 /* StringExtensionsTests.swift */,
+				OBJ_38 /* LinuxTestIndex.swift */,
+				OBJ_39 /* MockSchemaLoader.swift */,
+				OBJ_40 /* ObjectiveCIRTests.swift */,
+				OBJ_41 /* ObjectiveCInitTests.swift */,
+				OBJ_42 /* PlankTestExtension.swift */,
+				OBJ_43 /* StringExtensionsTests.swift */,
 			);
 			name = CoreTests;
 			path = Tests/CoreTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_46 /* Products */ = {
+		OBJ_48 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"plank::plank::Product" /* plank */,
@@ -199,12 +199,12 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_34 /* Tests */,
-				OBJ_42 /* CI */,
-				OBJ_43 /* docs */,
-				OBJ_44 /* Examples */,
-				OBJ_45 /* Utility */,
-				OBJ_46 /* Products */,
+				OBJ_36 /* Tests */,
+				OBJ_44 /* CI */,
+				OBJ_45 /* docs */,
+				OBJ_46 /* Examples */,
+				OBJ_47 /* Utility */,
+				OBJ_48 /* Products */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -213,7 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_8 /* Core */,
-				OBJ_31 /* plank */,
+				OBJ_33 /* plank */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -228,23 +228,23 @@
 				OBJ_13 /* JSIR.swift */,
 				OBJ_14 /* JSModelRenderer.swift */,
 				OBJ_15 /* JSRuntimeFile.swift */,
-				OBJ_17 /* ObjCADTRenderer.swift */,
-				OBJ_18 /* ObjCFileRenderer.swift */,
-				OBJ_19 /* ObjCModelRenderer.swift */,
-				OBJ_20 /* ObjectiveCBuilderExtension.swift */,
-				OBJ_21 /* ObjectiveCDebugExtension.swift */,
-				OBJ_22 /* ObjectiveCDictionaryExtension.swift */,
-				OBJ_23 /* ObjectiveCEqualityExtension.swift */,
-				OBJ_24 /* ObjectiveCFileGenerator.swift */,
-				OBJ_25 /* ObjectiveCIR.swift */,
-				OBJ_26 /* ObjectiveCInitExtension.swift */,
-				OBJ_27 /* ObjectiveCNSCodingExtension.swift */,
-				OBJ_28 /* Schema.swift */,
-				OBJ_29 /* SchemaLoader.swift */,
-				OBJ_30 /* StringExtensions.swift */,
 				OBJ_16 /* JavaFileGenerator.swift */,
-				814CB1921FFF6083004125D5 /* JavaIR.swift */,
-				814CB1941FFF6096004125D5 /* JavaModelRenderer.swift */,
+				OBJ_17 /* JavaIR.swift */,
+				OBJ_18 /* JavaModelRenderer.swift */,
+				OBJ_19 /* ObjCADTRenderer.swift */,
+				OBJ_20 /* ObjCFileRenderer.swift */,
+				OBJ_21 /* ObjCModelRenderer.swift */,
+				OBJ_22 /* ObjectiveCBuilderExtension.swift */,
+				OBJ_23 /* ObjectiveCDebugExtension.swift */,
+				OBJ_24 /* ObjectiveCDictionaryExtension.swift */,
+				OBJ_25 /* ObjectiveCEqualityExtension.swift */,
+				OBJ_26 /* ObjectiveCFileGenerator.swift */,
+				OBJ_27 /* ObjectiveCIR.swift */,
+				OBJ_28 /* ObjectiveCInitExtension.swift */,
+				OBJ_29 /* ObjectiveCNSCodingExtension.swift */,
+				OBJ_30 /* Schema.swift */,
+				OBJ_31 /* SchemaLoader.swift */,
+				OBJ_32 /* StringExtensions.swift */,
 			);
 			name = Core;
 			path = Sources/Core;
@@ -255,10 +255,10 @@
 /* Begin PBXNativeTarget section */
 		"plank::Core" /* Core */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_81 /* Build configuration list for PBXNativeTarget "Core" */;
+			buildConfigurationList = OBJ_83 /* Build configuration list for PBXNativeTarget "Core" */;
 			buildPhases = (
-				OBJ_84 /* Sources */,
-				OBJ_107 /* Frameworks */,
+				OBJ_86 /* Sources */,
+				OBJ_111 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -271,15 +271,15 @@
 		};
 		"plank::CoreTests" /* CoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_68 /* Build configuration list for PBXNativeTarget "CoreTests" */;
+			buildConfigurationList = OBJ_70 /* Build configuration list for PBXNativeTarget "CoreTests" */;
 			buildPhases = (
-				OBJ_71 /* Sources */,
-				OBJ_78 /* Frameworks */,
+				OBJ_73 /* Sources */,
+				OBJ_80 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_80 /* PBXTargetDependency */,
+				OBJ_82 /* PBXTargetDependency */,
 			);
 			name = CoreTests;
 			productName = CoreTests;
@@ -288,9 +288,9 @@
 		};
 		"plank::SwiftPMPackageDescription" /* plankPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_51 /* Build configuration list for PBXNativeTarget "plankPackageDescription" */;
+			buildConfigurationList = OBJ_53 /* Build configuration list for PBXNativeTarget "plankPackageDescription" */;
 			buildPhases = (
-				OBJ_54 /* Sources */,
+				OBJ_56 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -302,15 +302,15 @@
 		};
 		"plank::plank" /* plank */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_57 /* Build configuration list for PBXNativeTarget "plank" */;
+			buildConfigurationList = OBJ_59 /* Build configuration list for PBXNativeTarget "plank" */;
 			buildPhases = (
-				OBJ_60 /* Sources */,
-				OBJ_63 /* Frameworks */,
+				OBJ_62 /* Sources */,
+				OBJ_65 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_65 /* PBXTargetDependency */,
+				OBJ_67 /* PBXTargetDependency */,
 			);
 			name = plank;
 			productName = plank;
@@ -333,7 +333,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_46 /* Products */;
+			productRefGroup = OBJ_48 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -347,95 +347,95 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_54 /* Sources */ = {
+		OBJ_56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_55 /* Package.swift in Sources */,
+				OBJ_57 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_60 /* Sources */ = {
+		OBJ_62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_61 /* Cli.swift in Sources */,
-				OBJ_62 /* main.swift in Sources */,
+				OBJ_63 /* Cli.swift in Sources */,
+				OBJ_64 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_71 /* Sources */ = {
+		OBJ_73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_72 /* LinuxTestIndex.swift in Sources */,
-				OBJ_73 /* MockSchemaLoader.swift in Sources */,
-				OBJ_74 /* ObjectiveCIRTests.swift in Sources */,
-				OBJ_75 /* ObjectiveCInitTests.swift in Sources */,
-				OBJ_76 /* PlankTestExtension.swift in Sources */,
-				OBJ_77 /* StringExtensionsTests.swift in Sources */,
+				OBJ_74 /* LinuxTestIndex.swift in Sources */,
+				OBJ_75 /* MockSchemaLoader.swift in Sources */,
+				OBJ_76 /* ObjectiveCIRTests.swift in Sources */,
+				OBJ_77 /* ObjectiveCInitTests.swift in Sources */,
+				OBJ_78 /* PlankTestExtension.swift in Sources */,
+				OBJ_79 /* StringExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_84 /* Sources */ = {
+		OBJ_86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_85 /* FileGenerator.swift in Sources */,
-				OBJ_86 /* JSADTExtension.swift in Sources */,
-				OBJ_87 /* JSFileGenerator.swift in Sources */,
-				OBJ_88 /* JSFileRenderer.swift in Sources */,
-				OBJ_89 /* JSIR.swift in Sources */,
-				OBJ_90 /* JSModelRenderer.swift in Sources */,
-				OBJ_91 /* JSRuntimeFile.swift in Sources */,
-				OBJ_92 /* JavaFileGenerator.swift in Sources */,
-				OBJ_93 /* ObjCADTRenderer.swift in Sources */,
-				OBJ_94 /* ObjCFileRenderer.swift in Sources */,
-				OBJ_95 /* ObjCModelRenderer.swift in Sources */,
-				OBJ_96 /* ObjectiveCBuilderExtension.swift in Sources */,
-				814CB1951FFF6096004125D5 /* JavaModelRenderer.swift in Sources */,
-				OBJ_97 /* ObjectiveCDebugExtension.swift in Sources */,
-				OBJ_98 /* ObjectiveCDictionaryExtension.swift in Sources */,
-				OBJ_99 /* ObjectiveCEqualityExtension.swift in Sources */,
-				OBJ_100 /* ObjectiveCFileGenerator.swift in Sources */,
-				OBJ_101 /* ObjectiveCIR.swift in Sources */,
-				OBJ_102 /* ObjectiveCInitExtension.swift in Sources */,
-				OBJ_103 /* ObjectiveCNSCodingExtension.swift in Sources */,
-				OBJ_104 /* Schema.swift in Sources */,
-				OBJ_105 /* SchemaLoader.swift in Sources */,
-				814CB1931FFF6083004125D5 /* JavaIR.swift in Sources */,
-				OBJ_106 /* StringExtensions.swift in Sources */,
+				OBJ_87 /* FileGenerator.swift in Sources */,
+				OBJ_88 /* JSADTExtension.swift in Sources */,
+				OBJ_89 /* JSFileGenerator.swift in Sources */,
+				OBJ_90 /* JSFileRenderer.swift in Sources */,
+				OBJ_91 /* JSIR.swift in Sources */,
+				OBJ_92 /* JSModelRenderer.swift in Sources */,
+				OBJ_93 /* JSRuntimeFile.swift in Sources */,
+				OBJ_94 /* JavaFileGenerator.swift in Sources */,
+				OBJ_95 /* JavaIR.swift in Sources */,
+				OBJ_96 /* JavaModelRenderer.swift in Sources */,
+				OBJ_97 /* ObjCADTRenderer.swift in Sources */,
+				OBJ_98 /* ObjCFileRenderer.swift in Sources */,
+				OBJ_99 /* ObjCModelRenderer.swift in Sources */,
+				OBJ_100 /* ObjectiveCBuilderExtension.swift in Sources */,
+				OBJ_101 /* ObjectiveCDebugExtension.swift in Sources */,
+				OBJ_102 /* ObjectiveCDictionaryExtension.swift in Sources */,
+				OBJ_103 /* ObjectiveCEqualityExtension.swift in Sources */,
+				OBJ_104 /* ObjectiveCFileGenerator.swift in Sources */,
+				OBJ_105 /* ObjectiveCIR.swift in Sources */,
+				OBJ_106 /* ObjectiveCInitExtension.swift in Sources */,
+				OBJ_107 /* ObjectiveCNSCodingExtension.swift in Sources */,
+				OBJ_108 /* Schema.swift in Sources */,
+				OBJ_109 /* SchemaLoader.swift in Sources */,
+				OBJ_110 /* StringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_112 /* PBXTargetDependency */ = {
+		OBJ_116 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "plank::CoreTests" /* CoreTests */;
-			targetProxy = 814CB1911FFED24D004125D5 /* PBXContainerItemProxy */;
+			targetProxy = 812445F12004008D006DA59D /* PBXContainerItemProxy */;
 		};
-		OBJ_65 /* PBXTargetDependency */ = {
+		OBJ_67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "plank::Core" /* Core */;
-			targetProxy = 814CB18F1FFED24D004125D5 /* PBXContainerItemProxy */;
+			targetProxy = 812445EF2004008C006DA59D /* PBXContainerItemProxy */;
 		};
-		OBJ_80 /* PBXTargetDependency */ = {
+		OBJ_82 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "plank::Core" /* Core */;
-			targetProxy = 814CB1901FFED24D004125D5 /* PBXContainerItemProxy */;
+			targetProxy = 812445F02004008C006DA59D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_110 /* Debug */ = {
+		OBJ_114 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_111 /* Release */ = {
+		OBJ_115 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
@@ -483,7 +483,7 @@
 			};
 			name = Release;
 		};
-		OBJ_52 /* Debug */ = {
+		OBJ_54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -492,7 +492,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_53 /* Release */ = {
+		OBJ_55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -501,7 +501,7 @@
 			};
 			name = Release;
 		};
-		OBJ_58 /* Debug */ = {
+		OBJ_60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -520,7 +520,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_59 /* Release */ = {
+		OBJ_61 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -539,7 +539,7 @@
 			};
 			name = Release;
 		};
-		OBJ_69 /* Debug */ = {
+		OBJ_71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -557,7 +557,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_70 /* Release */ = {
+		OBJ_72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -575,7 +575,7 @@
 			};
 			name = Release;
 		};
-		OBJ_82 /* Debug */ = {
+		OBJ_84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -597,7 +597,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_83 /* Release */ = {
+		OBJ_85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -622,11 +622,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_109 /* Build configuration list for PBXAggregateTarget "plankPackageTests" */ = {
+		OBJ_113 /* Build configuration list for PBXAggregateTarget "plankPackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_110 /* Debug */,
-				OBJ_111 /* Release */,
+				OBJ_114 /* Debug */,
+				OBJ_115 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -640,38 +640,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_51 /* Build configuration list for PBXNativeTarget "plankPackageDescription" */ = {
+		OBJ_53 /* Build configuration list for PBXNativeTarget "plankPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_52 /* Debug */,
-				OBJ_53 /* Release */,
+				OBJ_54 /* Debug */,
+				OBJ_55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_57 /* Build configuration list for PBXNativeTarget "plank" */ = {
+		OBJ_59 /* Build configuration list for PBXNativeTarget "plank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_58 /* Debug */,
-				OBJ_59 /* Release */,
+				OBJ_60 /* Debug */,
+				OBJ_61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_68 /* Build configuration list for PBXNativeTarget "CoreTests" */ = {
+		OBJ_70 /* Build configuration list for PBXNativeTarget "CoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_69 /* Debug */,
-				OBJ_70 /* Release */,
+				OBJ_71 /* Debug */,
+				OBJ_72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_81 /* Build configuration list for PBXNativeTarget "Core" */ = {
+		OBJ_83 /* Build configuration list for PBXNativeTarget "Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_82 /* Debug */,
-				OBJ_83 /* Release */,
+				OBJ_84 /* Debug */,
+				OBJ_85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

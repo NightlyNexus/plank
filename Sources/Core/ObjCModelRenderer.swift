@@ -167,7 +167,12 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
         }
 
         return [
-            ObjCIR.Root.imports(classNames: self.renderReferencedClasses(), myName: self.className, parentName: parentName)
+            ObjCIR.Root.imports(
+                classNames: Set(self.renderReferencedClasses().map({ (s: String) -> String in
+                    s.replacingOccurrences(of: "*", with: "").trimmingCharacters(in: .whitespaces)
+                })),
+                myName: self.className,
+                parentName: parentName)
         ] + adtRoots + enumRoots + [
             ObjCIR.Root.structDecl(name: self.dirtyPropertyOptionName,
                                fields: rootSchema.properties.keys
@@ -207,7 +212,7 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
                     (.publicM, self.renderMergeWithModelWithInitType())
                     //(self.isBaseClass ? .publicM : .privateM, self.renderGenerateDictionary())
                 ],
-                properties: properties.map { param, prop in (param, objcClassFromSchema(param, prop.schema), prop, .readonly) },
+                properties: properties.map { param, prop in (param, typeFromSchema(param, prop.schema), prop, .readonly) },
                 protocols: protocols
             ),
             ObjCIR.Root.classDecl(
@@ -220,7 +225,7 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
                     }),
                     (.publicM, self.renderBuilderMergeWithModel())
                     ] + self.renderBuilderPropertySetters().map { (.privateM, $0) },
-                properties: properties.map { param, prop in (param, objcClassFromSchema(param, prop.schema), prop, .readwrite) },
+                properties: properties.map { param, prop in (param, typeFromSchema(param, prop.schema), prop, .readwrite) },
                 protocols: [:]),
             ObjCIR.Root.macro("NS_ASSUME_NONNULL_END")
         ]
