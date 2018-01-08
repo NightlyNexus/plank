@@ -168,9 +168,12 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
 
         return [
             ObjCIR.Root.imports(
-                classNames: Set(self.renderReferencedClasses().map({ (s: String) -> String in
-                    s.replacingOccurrences(of: "*", with: "").trimmingCharacters(in: .whitespaces)
-                })),
+                classNames: Set(self.renderReferencedClasses().map {
+                    // Objective-C types contain "*" if they are a pointer type
+                    // This information is excessive for import statements so
+                    // we're removing it here.
+                    $0.replacingOccurrences(of: "*", with: "")
+                }),
                 myName: self.className,
                 parentName: parentName)
         ] + adtRoots + enumRoots + [

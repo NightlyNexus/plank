@@ -317,7 +317,7 @@ public struct ObjCIR {
                     parentName.map(ObjCIR.fileImportStmt) ?? "",
                     "#import \"\(ObjCRuntimeHeaderFile().fileName)\""
                 ].filter { $0 != "" }  + (["\(myName)Builder"] + classNames)
-                    .sorted().map { "@class \($0);" }
+                    .sorted().map { "@class \($0.trimmingCharacters(in: .whitespaces));" }
             case .classDecl(let className, let extends, let methods, let properties, let protocols):
                 let protocolList = protocols.keys.sorted().joined(separator: ", ")
                 let protocolDeclarations = protocols.count > 0 ? "<\(protocolList)>" : ""
