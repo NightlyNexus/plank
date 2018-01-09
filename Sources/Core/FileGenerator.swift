@@ -46,7 +46,7 @@ protocol FileRenderer {
     associatedtype Root: RootRenderer
     var rootSchema: SchemaObjectRoot { get }
     var params: GenerationParameters { get }
-    func typeFromSchema(_ param: String, _ schema: Schema) -> String
+    func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String
     func renderRoots() -> [Root]
 }
 
@@ -72,7 +72,7 @@ extension FileRenderer {
         case .reference(with: let ref):
             switch ref.force() {
             case .some(.object(_)):
-                return [typeFromSchema("", schema)]
+                return [typeFromSchema("", schema.nonnullProperty())]
             default:
                 fatalError("Bad reference found in schema for class: \(self.className)")
             }

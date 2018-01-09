@@ -10,20 +10,21 @@ import Foundation
 protocol JavaFileRenderer: FileRenderer {}
 
 extension JavaFileRenderer {
-    func typeFromSchema(_ param: String, _ schema: Schema) -> String {
-        switch schema {
+    func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String {
+        // TODO: Figure out if "Optional" goes here
+        switch schema.schema {
         case .array(itemType: .none):
             return "List<Object>"
         case .array(itemType: .some(let itemType)):
-            return "List<\(typeFromSchema(param, itemType))>"
+            return "List<\(typeFromSchema(param, itemType.nonnullProperty()))>"
         case .set(itemType: .none):
             return "Set<Object>"
         case .set(itemType: .some(let itemType)):
-            return "Set<\(typeFromSchema(param, itemType))>"
+            return "Set<\(typeFromSchema(param, itemType.nonnullProperty()))>"
         case .map(valueType: .none):
             return "Map<String, Object>"
         case .map(valueType: .some(let valueType)):
-            return "Map<String, \(typeFromSchema(param, valueType))>"
+            return "Map<String, \(typeFromSchema(param, valueType.nonnullProperty()))>"
         case .string(format: .none),
              .string(format: .some(.email)),
              .string(format: .some(.hostname)),
@@ -47,7 +48,7 @@ extension JavaFileRenderer {
         case .reference(with: let ref):
             switch ref.force() {
             case .some(.object(let schemaRoot)):
-                return typeFromSchema(param, .object(schemaRoot))
+                return typeFromSchema(param, (.object(schemaRoot) as Schema).nonnullProperty())
             default:
                 fatalError("Bad reference found in schema for class: \(className)")
             }

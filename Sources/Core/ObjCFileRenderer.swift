@@ -15,27 +15,27 @@ extension ObjCFileRenderer {
         return "\(self.className)Builder"
     }
 
-    func typeFromSchema(_ param: String, _ schema: Schema) -> String {
-        switch schema {
+    func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String {
+        switch schema.schema {
         case .array(itemType: .none):
             return "NSArray *"
         case .array(itemType: .some(let itemType)) where itemType.isObjCPrimitiveType:
             // Objective-C primitive types are represented as NSNumber
             return "NSArray<NSNumber /* \(itemType.debugDescription) */ *> *"
         case .array(itemType: .some(let itemType)):
-            return "NSArray<\(typeFromSchema(param, itemType))> *"
+            return "NSArray<\(typeFromSchema(param, itemType.nonnullProperty()))> *"
         case .set(itemType: .none):
             return "NSSet *"
         case .set(itemType: .some(let itemType)) where itemType.isObjCPrimitiveType:
             return "NSSet<NSNumber /*> \(itemType.debugDescription) */ *> *"
         case .set(itemType: .some(let itemType)):
-            return "NSSet<\(typeFromSchema(param, itemType))> *"
+            return "NSSet<\(typeFromSchema(param, itemType.nonnullProperty()))> *"
         case .map(valueType: .none):
             return "NSDictionary *"
         case .map(valueType: .some(let valueType)) where valueType.isObjCPrimitiveType:
             return "NSDictionary<NSString *, NSNumber /* \(valueType.debugDescription) */ *> *"
         case .map(valueType: .some(let valueType)):
-            return "NSDictionary<NSString *, \(typeFromSchema(param, valueType))> *"
+            return "NSDictionary<NSString *, \(typeFromSchema(param, valueType.nonnullProperty()))> *"
         case .string(format: .none),
              .string(format: .some(.email)),
              .string(format: .some(.hostname)),
@@ -59,7 +59,7 @@ extension ObjCFileRenderer {
         case .reference(with: let ref):
             switch ref.force() {
             case .some(.object(let schemaRoot)):
-                return typeFromSchema(param, .object(schemaRoot))
+                return typeFromSchema(param, (.object(schemaRoot) as Schema).nonnullProperty())
             default:
                 fatalError("Bad reference found in schema for class: \(className)")
             }

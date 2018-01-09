@@ -11,27 +11,27 @@ import Foundation
 protocol JSFileRenderer: FileRenderer {}
 
 extension JSFileRenderer {
-    func typeFromSchema(_ param: String, _ schema: Schema) -> String {
-        switch schema {
+    func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String {
+        switch schema.schema {
         case .array(itemType: .none):
             return "Array<*>"
         case .array(itemType: .some(let itemType)) where itemType.isObjCPrimitiveType:
             // JS primitive types are represented as number
             return "Array<number /* \(itemType.debugDescription) */>"
         case .array(itemType: .some(let itemType)):
-            return "Array<\(typeFromSchema(param, itemType))>"
+            return "Array<\(typeFromSchema(param, itemType.nonnullProperty()))>"
         case .set(itemType: .none):
             return "Set<*>"
         case .set(itemType: .some(let itemType)) where itemType.isObjCPrimitiveType:
             return "Set<number /* \(itemType.debugDescription)> */>"
         case .set(itemType: .some(let itemType)):
-            return "Set<\(typeFromSchema(param, itemType))>"
+            return "Set<\(typeFromSchema(param, itemType.nonnullProperty()))>"
         case .map(valueType: .none):
             return "{}"
         case .map(valueType: .some(let valueType)) where valueType.isObjCPrimitiveType:
             return "{ +[string]: number } /* \(valueType.debugDescription) */"
         case .map(valueType: .some(let valueType)):
-            return "{ +[string]: \(typeFromSchema(param, valueType)) }"
+            return "{ +[string]: \(typeFromSchema(param, valueType.nonnullProperty())) }"
         case .string(format: .none),
              .string(format: .some(.email)),
              .string(format: .some(.hostname)),
@@ -55,7 +55,7 @@ extension JSFileRenderer {
         case .reference(with: let ref):
             switch ref.force() {
             case .some(.object(let schemaRoot)):
-                return typeFromSchema(param, .object(schemaRoot))
+                return typeFromSchema(param, (.object(schemaRoot) as Schema).nonnullProperty())
             default:
                 fatalError("Bad reference found in schema for class: \(className)")
             }

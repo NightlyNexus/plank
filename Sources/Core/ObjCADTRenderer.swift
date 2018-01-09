@@ -94,7 +94,7 @@ struct ObjCADTRenderer: ObjCFileRenderer {
             let name = ObjCADTRenderer.objectName(prop.schema)
             let arg = String(name.prefix(1)).lowercased() + String(name.dropFirst())
 
-            return ObjCIR.method("+ (instancetype)objectWith\(name):(\(self.typeFromSchema(name, prop.schema)))\(arg)") {
+            return ObjCIR.method("+ (instancetype)objectWith\(name):(\(self.typeFromSchema(name, prop)))\(arg)") {
                 [
                     "\(self.className) *obj = [[\(self.className) alloc] init];",
                     "obj.value\(index) = \(arg);",
@@ -177,7 +177,7 @@ struct ObjCADTRenderer: ObjCFileRenderer {
         let signatureComponents  = self.dataTypes.enumerated().map { (index, prop) -> String in
             let name = ObjCADTRenderer.objectName(prop.schema)
             let arg = String(name.prefix(1)).lowercased() + String(name.dropFirst())
-            return "\(index == 0 ? "match" : "or")\(name):(nullable PLANK_NOESCAPE void (^)(\(self.typeFromSchema(name, prop.schema)) \(arg)))\(arg)MatchHandler"
+            return "\(index == 0 ? "match" : "or")\(name):(nullable PLANK_NOESCAPE void (^)(\(self.typeFromSchema(name, prop)) \(arg)))\(arg)MatchHandler"
         }
 
         return ObjCIR.method("- (void)\(signatureComponents.joined(separator: " "))") {[
@@ -200,9 +200,12 @@ struct ObjCADTRenderer: ObjCFileRenderer {
     }
     func renderClass(name: String) -> [ObjCIR.Root] {
         let internalTypeEnum = self.renderInternalTypeEnum()
-        let internalTypeProp: SimpleProperty = ("internal_type", typeFromSchema("internal_type", .enumT(.integer([]))),
-                                                SchemaObjectProperty(schema: .enumT(.integer([])), nullability: nil), // Ask @schneider about this
-                                                .readwrite)
+        let internalTypeProp: SimpleProperty = (
+            "internal_type",
+            typeFromSchema("internal_type", (.enumT(.integer([])) as Schema).nonnullProperty()),
+            SchemaObjectProperty(schema: .enumT(.integer([]))),
+            .readwrite
+        )
 
         let protocols: [String: [ObjCIR.Method]] = [
             "NSSecureCoding": [self.renderSupportsSecureCoding(), self.renderInitWithCoder(), self.renderEncodeWithCoder()],
@@ -211,7 +214,7 @@ struct ObjCADTRenderer: ObjCFileRenderer {
 
         let props: [SimpleProperty] = [internalTypeProp] + self.dataTypes.enumerated()
             .map { idx, prop in ("value\(idx)", prop) }
-            .map { param, prop in (param, typeFromSchema(param, prop.schema), prop, .readwrite) }
+            .map { param, prop in (param, typeFromSchema(param, prop), prop, .readwrite) }
 
         return [
             ObjCIR.Root.macro("NS_ASSUME_NONNULL_BEGIN"),

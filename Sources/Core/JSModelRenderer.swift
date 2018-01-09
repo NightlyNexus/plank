@@ -32,7 +32,7 @@ public struct JSModelRenderer: JSFileRenderer {
 
         let parentName = resolveClassName(self.parentDescriptor)
         let props: [SimpleProperty] = properties.map { param, prop in
-            return (param, typeFromSchema(param, prop.schema), prop, .readonly)
+            return (param, typeFromSchema(param, prop), prop, .readonly)
         }
 
         return [JSIR.Root.imports(classNames: self.renderReferencedClasses(), myName: self.className, parentName: parentName)] +

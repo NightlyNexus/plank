@@ -215,7 +215,7 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
                     (.publicM, self.renderMergeWithModelWithInitType())
                     //(self.isBaseClass ? .publicM : .privateM, self.renderGenerateDictionary())
                 ],
-                properties: properties.map { param, prop in (param, typeFromSchema(param, prop.schema), prop, .readonly) },
+                properties: properties.map { param, prop in (param, typeFromSchema(param, prop), prop, .readonly) },
                 protocols: protocols
             ),
             ObjCIR.Root.classDecl(
@@ -228,7 +228,7 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
                     }),
                     (.publicM, self.renderBuilderMergeWithModel())
                     ] + self.renderBuilderPropertySetters().map { (.privateM, $0) },
-                properties: properties.map { param, prop in (param, typeFromSchema(param, prop.schema), prop, .readwrite) },
+                properties: properties.map { param, prop in (param, typeFromSchema(param, prop), prop, .readwrite) },
                 protocols: [:]),
             ObjCIR.Root.macro("NS_ASSUME_NONNULL_END")
         ]
