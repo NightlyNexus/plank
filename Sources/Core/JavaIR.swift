@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+public struct JavaIR {
+    enum JavaRoot: RootRenderer {
+        func renderImplementation() -> [String] {
+            return []
+        }
+    }
+}
