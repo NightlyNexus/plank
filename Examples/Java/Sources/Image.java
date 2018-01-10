@@ -6,6 +6,8 @@
 //  @generated
 //
 
+package com.pinterest.models;
+
 @AutoValue
 public abstract class Image {
 }

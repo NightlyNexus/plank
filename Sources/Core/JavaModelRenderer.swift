@@ -94,7 +94,11 @@ public struct JavaModelRenderer: JavaFileRenderer {
  */
 
     func renderRoots() -> [JavaIR.Root] {
-        let roots: [JavaIR.Root] = [
+        let packages = self.params[.packageName].flatMap {
+            [JavaIR.Root.packages(names: [$0])]
+        } ?? []
+
+        let roots: [JavaIR.Root] = packages + [
             JavaIR.Root.classDecl(
                 aClass: JavaIR.Class(
                     annotations: ["AutoValue"],

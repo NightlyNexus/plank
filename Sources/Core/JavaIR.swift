@@ -67,9 +67,7 @@ public struct JavaIR {
     }
 
     enum Root: RootRenderer {
-
         case packages(names: Set<String>)
-
         case imports(names: Set<String>)
         case classDecl(
             aClass: JavaIR.Class
@@ -78,9 +76,9 @@ public struct JavaIR {
 
         func renderImplementation() -> [String] {
             switch self {
-            case let .imports(names):
-                return names.map { "package \($0);" }
             case let .packages(names):
+                return names.map { "package \($0);" }
+            case let .imports(names):
                 return names.map { "import \($0);" }
             case let .classDecl(aClass: cls):
                 return cls.annotations.map { "@\($0)" } + [
