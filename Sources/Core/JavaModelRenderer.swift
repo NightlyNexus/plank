@@ -49,8 +49,14 @@ extension JavaFileRenderer {
             return "Double"
         case .boolean:
             return "Boolean"
-        case .enumT:
-            return enumTypeName(propertyName: param, className: className)
+        case .enumT(let enumObj):
+            let enumName = enumTypeName(propertyName: param, className: className)
+            switch enumObj {
+            case .integer(_):
+                return "@\(enumName) int"
+            case .string(_, defaultValue: _):
+                return "@\(enumName) String"
+            }
         case .object(let objSchemaRoot):
             return "\(objSchemaRoot.className(with: params))"
         case .reference(with: let ref):
@@ -75,31 +81,6 @@ public struct JavaModelRenderer: JavaFileRenderer {
         self.params = params
     }
 
-/*
-     @AutoValue
-     public abstract class Animal {
-     public abstract String name();
-     public abstract int numberOfLegs();
-
-     public static Builder builder() {
-     return new AutoValue_Animal.Builder();
-     }
-
-     abstract Builder toBuilder();
-
-     public Animal withName(String name) {
-     return toBuilder().setName(name).build();
-     }
-
-     @AutoValue.Builder
-     public abstract static class Builder {
-     public abstract Builder setName(String value);
-     public abstract Builder setNumberOfLegs(int value);
-     public abstract Animal build();
-     }
-     }
-
- */
     func renderBuilder() -> JavaIR.Method {
         return JavaIR.method("public static Builder builder()") {[
             "return new AutoValue_\(className).Builder();"
@@ -107,7 +88,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
     }
 
     func renderBuilderBuild() -> JavaIR.Method {
-        return JavaIR.method("public abstract Animal build()") {[]}
+        return JavaIR.method("public abstract \(self.className) build()") {[]}
     }
 
     func renderToBuilder() -> JavaIR.Method {
@@ -141,8 +122,33 @@ public struct JavaModelRenderer: JavaFileRenderer {
         } ?? []
 
         let imports = [
-            JavaIR.Root.imports(names: ["com.google.auto.value.AutoValue"])
+            JavaIR.Root.imports(names: [
+                "com.google.auto.value.AutoValue",
+                "java.util.Date",
+                "java.util.Map",
+                "java.util.Set",
+                "java.util.List",
+                "java.util.Optional",
+                "java.net.URI",
+                "java.lang.annotation.Retention",
+                "java.lang.annotation.RetentionPolicy",
+                "android.support.annotation.StringDef",
+                "android.support.annotation.IntDef"
+            ])
         ]
+
+        let enumProps = self.properties.flatMap { (param, prop) -> [JavaIR.Enum] in
+            switch prop.schema {
+            case .enumT(let enumValues):
+                return [
+                    JavaIR.Enum(
+                        name: enumTypeName(propertyName: param, className: self.className),
+                        values: enumValues
+                    )
+                ]
+            default: return []
+            }
+        }
 
         let builderClass = JavaIR.Class(
             annotations: ["AutoValue.Builder"],
@@ -151,6 +157,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
             methods: self.renderBuilderProperties() + [
                 self.renderBuilderBuild()
             ],
+            enums: [],
             innerClasses: []
         )
 
@@ -163,14 +170,17 @@ public struct JavaModelRenderer: JavaFileRenderer {
                     self.renderBuilder(),
                     self.renderToBuilder()
                 ],
+                enums: enumProps,
                 innerClasses: [
                     builderClass
                 ]
             )
         )
-        let roots: [JavaIR.Root] = packages + imports + [
-            modelClass
-        ]
+
+        let roots: [JavaIR.Root] =
+            packages +
+            imports +
+            [modelClass]
         return roots
     }
 }

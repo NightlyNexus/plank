@@ -10,15 +10,22 @@
 import type { PlankDate, PlankURI } from './runtime.flow.js';
 import type { ImageType } from './ImageType.js';
 
+export type UserEmailIntervalType = 
+  | 'unset'
+  | 'immediate'
+  | 'daily'
+;
+
 export type UserType = $Shape<{|
+  +email_interval: UserEmailIntervalType,
   +last_name: ?string,
   +id: ?string,
-  +first_name: ?string,
   +image: ?ImageType,
   +counts: ?{ +[string]: number } /* Integer */,
   +created_at: ?PlankDate,
-  +username: ?string,
+  +first_name: ?string,
   +bio: ?string,
+  +username: ?string,
 |}> & {
   id: string
 };

@@ -14,43 +14,20 @@ public enum JavaVisibility: String {
 
 }
 
-/*
-
- @AutoValue
- public abstract class Animal {
- public abstract String name();
- public abstract int numberOfLegs();
-
- public static Builder builder() {
- return new AutoValue_Animal.Builder();
- }
-
- abstract Builder toBuilder();
-
- public Animal withName(String name) {
- return toBuilder().setName(name).build();
- }
-
- @AutoValue.Builder
- public abstract static class Builder {
- public abstract Builder setName(String value);
- public abstract Builder setNumberOfLegs(int value);
- public abstract Animal build();
- }
- }
- */
 public struct JavaIR {
 
     public struct Method {
+        let annotations: Set<String>
         let body: [String]
         let signature: String
 
         func render() -> [String] {
             // HACK: We should actually have an enum / optionset that we can check for abstract, static, ...
+            let annotationLines = annotations.map { "@\($0)" }
             if signature.contains("abstract") {
-                return ["\(signature);"]
+                return annotationLines + ["\(signature);"]
             }
-            return [
+            return annotationLines + [
                 "\(signature) {",
                 -->body,
                 "}"
@@ -58,8 +35,54 @@ public struct JavaIR {
         }
     }
 
-    static func method(_ signature: String, body: () -> [String]) -> JavaIR.Method {
-        return JavaIR.Method(body: body(), signature: signature)
+    static func method(annotations: Set<String> = [], _ signature: String, body: () -> [String]) -> JavaIR.Method {
+        return JavaIR.Method(annotations: annotations, body: body(), signature: signature)
+    }
+
+    struct Enum {
+        let name: String
+        let values: EnumType
+
+        func render() -> [String] {
+            /*
+             public static final String NETWORK_NONE = "none";
+             public static final String NETWORK_UNKNOWN = "unknown";
+             public static final String NETWORK_2G = "2g";
+             public static final String NETWORK_3G = "3g";
+             public static final String NETWORK_4G = "4g";
+             public static final String NETWORK_WIFI = "WiFi";
+             @StringDef({NETWORK_NONE, NETWORK_UNKNOWN, NETWORK_2G, NETWORK_3G, NETWORK_4G, NETWORK_WIFI})
+             @Retention(RetentionPolicy.SOURCE)
+             public @interface NetworkClass {}
+             */
+            switch values {
+            case let .integer(values):
+                let names = values
+                    .map { ($0.description.uppercased(), $0.defaultValue) }
+                    .map { "public static final int \($0.0) = \($0.1);" }
+                let defAnnotationNames = values
+                    .map { $0.description.uppercased() }
+                    .joined(separator: ", ")
+                return names + [
+                    "@IntDef({\(defAnnotationNames)})",
+                    "@Retention(RetentionPolicy.SOURCE)",
+                    "public @interface \(name) {}"
+                ]
+            case let .string(values, defaultValue: _):
+                // TODO: Use default value in builder method to specify what our default value should be
+                let names = values
+                    .map { ($0.description.uppercased(), $0.defaultValue) }
+                    .map { "public static final String \($0.0) = \"\($0.1)\";" }
+                let defAnnotationNames = values
+                    .map { $0.description.uppercased() }
+                    .joined(separator: ", ")
+                return names + [
+                    "@StringDef({\(defAnnotationNames)})",
+                    "@Retention(RetentionPolicy.SOURCE)",
+                    "public @interface \(name) {}"
+                ]
+            }
+        }
     }
 
     struct Class {
@@ -67,11 +90,13 @@ public struct JavaIR {
         let extends: String?
         let name: String
         let methods: [JavaIR.Method]
+        let enums: [Enum]
         let innerClasses: [JavaIR.Class]
 
         func render() -> [String] {
             return annotations.map { "@\($0)" } + [
                 "public abstract class \(name) {",
+                -->enums.flatMap { $0.render() },
                 -->methods.flatMap { $0.render() },
                 -->innerClasses.flatMap { $0.render() },
                 "}"
@@ -85,7 +110,6 @@ public struct JavaIR {
         case classDecl(
             aClass: JavaIR.Class
         )
-        case enumDecl(name: String, values: EnumType)
 
         func renderImplementation() -> [String] {
             switch self {
@@ -95,11 +119,7 @@ public struct JavaIR {
                 return names.map { "import \($0);" }
             case let .classDecl(aClass: cls):
                 return cls.render()
-            case .enumDecl(_, _):
-                // TODO
-                break
             }
-            return []
         }
     }
 }

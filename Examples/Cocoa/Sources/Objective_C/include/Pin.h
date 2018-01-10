@@ -30,6 +30,12 @@ typedef NS_ENUM(NSInteger, PinAttributionObjectsInternalType) {
 
 NS_ASSUME_NONNULL_END
 
+typedef NS_ENUM(NSInteger, PinInStockType) {
+    PinInStockTypeUnknown = -1,
+    PinInStockTypeOutOfStock = 0,
+    PinInStockTypeInStock = 1
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Pin : NSObject<NSCopying, NSSecureCoding>
@@ -38,12 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, NSNumber /* Integer */ *> * counts;
 @property (nullable, nonatomic, copy, readonly) NSString * descriptionText;
 @property (nonnull, nonatomic, strong, readonly) NSDictionary<NSString *, User *> * creator;
-@property (nullable, nonatomic, strong, readonly) NSArray<NSDictionary *> * tags;
+@property (nonatomic, assign, readonly) PinInStockType inStock;
 @property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, NSString *> * attribution;
-@property (nullable, nonatomic, strong, readonly) Board * board;
+@property (nullable, nonatomic, strong, readonly) NSArray<NSDictionary *> * tags;
 @property (nullable, nonatomic, strong, readonly) NSDictionary * visualSearchAttrs;
-@property (nullable, nonatomic, copy, readonly) NSString * color;
+@property (nullable, nonatomic, strong, readonly) Board * board;
 @property (nullable, nonatomic, copy, readonly) NSURL * link;
+@property (nullable, nonatomic, copy, readonly) NSString * color;
 @property (nonnull, nonatomic, copy, readonly) NSString * identifier;
 @property (nullable, nonatomic, strong, readonly) Image * image;
 @property (nonnull, nonatomic, copy, readonly) NSDate * createdAt;
@@ -67,12 +74,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong, readwrite) NSDictionary<NSString *, NSNumber /* Integer */ *> * counts;
 @property (nullable, nonatomic, copy, readwrite) NSString * descriptionText;
 @property (nonnull, nonatomic, strong, readwrite) NSDictionary<NSString *, User *> * creator;
-@property (nullable, nonatomic, strong, readwrite) NSArray<NSDictionary *> * tags;
+@property (nonatomic, assign, readwrite) PinInStockType inStock;
 @property (nullable, nonatomic, strong, readwrite) NSDictionary<NSString *, NSString *> * attribution;
-@property (nullable, nonatomic, strong, readwrite) Board * board;
+@property (nullable, nonatomic, strong, readwrite) NSArray<NSDictionary *> * tags;
 @property (nullable, nonatomic, strong, readwrite) NSDictionary * visualSearchAttrs;
-@property (nullable, nonatomic, copy, readwrite) NSString * color;
+@property (nullable, nonatomic, strong, readwrite) Board * board;
 @property (nullable, nonatomic, copy, readwrite) NSURL * link;
+@property (nullable, nonatomic, copy, readwrite) NSString * color;
 @property (nonnull, nonatomic, copy, readwrite) NSString * identifier;
 @property (nullable, nonatomic, strong, readwrite) Image * image;
 @property (nonnull, nonatomic, copy, readwrite) NSDate * createdAt;

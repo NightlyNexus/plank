@@ -8,10 +8,21 @@
 
 package com.pinterest.models;
 
+import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
+import java.util.Set;
+import java.net.URI;
+import android.support.annotation.StringDef;
+import java.lang.annotation.Retention;
+import java.util.Date;
+import java.util.List;
+import java.lang.annotation.RetentionPolicy;
+import java.util.Map;
 
 @AutoValue
 public abstract class Board {
+
     public abstract Optional<String> name();
     public abstract Optional<String> identifier();
     public abstract Image image();
@@ -27,6 +38,7 @@ public abstract class Board {
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract class Builder {
+    
         public abstract Builder setName(Optional<String> value);
         public abstract Builder setIdentifier(Optional<String> value);
         public abstract Builder setImage(Image value);
@@ -44,7 +56,7 @@ public abstract class Board {
         public abstract Builder setDescriptionText(String value);
         public abstract Builder setCreator(Map<String, String> value);
         public abstract Builder setUrl(URI value);
-        public abstract Animal build();
+        public abstract Board build();
     
     }
 }

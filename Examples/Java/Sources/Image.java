@@ -8,10 +8,21 @@
 
 package com.pinterest.models;
 
+import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
+import java.util.Set;
+import java.net.URI;
+import android.support.annotation.StringDef;
+import java.lang.annotation.Retention;
+import java.util.Date;
+import java.util.List;
+import java.lang.annotation.RetentionPolicy;
+import java.util.Map;
 
 @AutoValue
 public abstract class Image {
+
     public abstract Optional<Integer> height();
     public abstract Optional<URI> url();
     public abstract Optional<Integer> width();
@@ -21,13 +32,14 @@ public abstract class Image {
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract class Builder {
+    
         public abstract Builder setHeight(Optional<Integer> value);
         public abstract Builder setUrl(Optional<URI> value);
         public abstract Builder setWidth(Optional<Integer> value);
         public abstract Builder setHeight(Integer value);
         public abstract Builder setUrl(URI value);
         public abstract Builder setWidth(Integer value);
-        public abstract Animal build();
+        public abstract Image build();
     
     }
 }

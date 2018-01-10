@@ -8,21 +8,38 @@
 
 package com.pinterest.models;
 
+import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
+import java.util.Set;
+import java.net.URI;
+import android.support.annotation.StringDef;
+import java.lang.annotation.Retention;
+import java.util.Date;
+import java.util.List;
+import java.lang.annotation.RetentionPolicy;
+import java.util.Map;
 
 @AutoValue
 public abstract class Pin {
+    public static final int UNKNOWN = -1;
+    public static final int OUT_OF_STOCK = 0;
+    public static final int IN_STOCK = 1;
+    @IntDef({UNKNOWN, OUT_OF_STOCK, IN_STOCK})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface PinInStockType {}
     public abstract Optional<String> note();
     public abstract Optional<Map<String, String>> media();
     public abstract Optional<Map<String, Integer>> counts();
     public abstract Optional<String> descriptionText();
     public abstract Map<String, User> creator();
-    public abstract Optional<List<Map<String, Object>>> tags();
+    public abstract Optional<@PinInStockType int> inStock();
     public abstract Optional<Map<String, String>> attribution();
-    public abstract Optional<Board> board();
+    public abstract Optional<List<Map<String, Object>>> tags();
     public abstract Optional<Map<String, Object>> visualSearchAttrs();
-    public abstract Optional<String> color();
+    public abstract Optional<Board> board();
     public abstract Optional<URI> link();
+    public abstract Optional<String> color();
     public abstract String identifier();
     public abstract Optional<Image> image();
     public abstract Date createdAt();
@@ -34,17 +51,19 @@ public abstract class Pin {
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract class Builder {
+    
         public abstract Builder setNote(Optional<String> value);
         public abstract Builder setMedia(Optional<Map<String, String>> value);
         public abstract Builder setCounts(Optional<Map<String, Integer>> value);
         public abstract Builder setDescriptionText(Optional<String> value);
         public abstract Builder setCreator(Map<String, User> value);
-        public abstract Builder setTags(Optional<List<Map<String, Object>>> value);
+        public abstract Builder setInStock(Optional<@PinInStockType int> value);
         public abstract Builder setAttribution(Optional<Map<String, String>> value);
-        public abstract Builder setBoard(Optional<Board> value);
+        public abstract Builder setTags(Optional<List<Map<String, Object>>> value);
         public abstract Builder setVisualSearchAttrs(Optional<Map<String, Object>> value);
-        public abstract Builder setColor(Optional<String> value);
+        public abstract Builder setBoard(Optional<Board> value);
         public abstract Builder setLink(Optional<URI> value);
+        public abstract Builder setColor(Optional<String> value);
         public abstract Builder setIdentifier(String value);
         public abstract Builder setImage(Optional<Image> value);
         public abstract Builder setCreatedAt(Date value);
@@ -54,16 +73,17 @@ public abstract class Pin {
         public abstract Builder setMedia(Map<String, String> value);
         public abstract Builder setCounts(Map<String, Integer> value);
         public abstract Builder setDescriptionText(String value);
-        public abstract Builder setTags(List<Map<String, Object>> value);
+        public abstract Builder setInStock(@PinInStockType int value);
         public abstract Builder setAttribution(Map<String, String> value);
-        public abstract Builder setBoard(Board value);
+        public abstract Builder setTags(List<Map<String, Object>> value);
         public abstract Builder setVisualSearchAttrs(Map<String, Object> value);
-        public abstract Builder setColor(String value);
+        public abstract Builder setBoard(Board value);
         public abstract Builder setLink(URI value);
+        public abstract Builder setColor(String value);
         public abstract Builder setImage(Image value);
         public abstract Builder setAttributionObjects(List<PinAttributionObjects> value);
         public abstract Builder setUrl(URI value);
-        public abstract Animal build();
+        public abstract Pin build();
     
     }
 }
