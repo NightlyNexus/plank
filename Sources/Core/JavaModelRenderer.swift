@@ -115,17 +115,16 @@ public struct JavaModelRenderer: JavaFileRenderer {
     }
 
     func renderBuilderProperties() -> [JavaIR.Method] {
-        // We lose the nullability information here since AutoValue can handle both
-        // setFoo(Optional<T> value) and setFoo(T value)
-        // https://github.com/google/auto/blob/master/value/userguide/builders-howto.md#-handle-optional-properties
         let props = self.properties.map { param, schemaObj in
             JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
         }
-
+        // We add a convenience setter for Optional types since AutoValue can handle both
+        // setFoo(Optional<T> value) and setFoo(T value)
+        // https://github.com/google/auto/blob/master/value/userguide/builders-howto.md#-handle-optional-properties
         let convenienceProps = self.properties.filter { _, schemaObj in
             return schemaObj.nullability == nil || schemaObj.nullability == .nullable
         }.map { param, schemaObj in
-                JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
+            JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
         }
         return props + convenienceProps
     }
@@ -133,7 +132,6 @@ public struct JavaModelRenderer: JavaFileRenderer {
     func renderModelProperties() -> [JavaIR.Method] {
         return self.properties.map { param, schemaObj in
             JavaIR.method("public abstract \(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
-
         }
     }
 
@@ -141,6 +139,10 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let packages = self.params[.packageName].flatMap {
             [JavaIR.Root.packages(names: [$0])]
         } ?? []
+
+        let imports = [
+            JavaIR.Root.imports(names: ["com.google.auto.value.AutoValue"])
+        ]
 
         let builderClass = JavaIR.Class(
             annotations: ["AutoValue.Builder"],
@@ -166,7 +168,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
                 ]
             )
         )
-        let roots: [JavaIR.Root] = packages + [
+        let roots: [JavaIR.Root] = packages + imports + [
             modelClass
         ]
         return roots

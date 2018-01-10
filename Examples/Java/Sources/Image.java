@@ -8,6 +8,8 @@
 
 package com.pinterest.models;
 
+import com.google.auto.value.AutoValue;
+
 @AutoValue
 public abstract class Image {
     public abstract Optional<Integer> height();

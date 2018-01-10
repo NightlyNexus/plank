@@ -8,6 +8,8 @@
 
 package com.pinterest.models;
 
+import com.google.auto.value.AutoValue;
+
 @AutoValue
 public abstract class Board {
     public abstract Optional<String> name();
