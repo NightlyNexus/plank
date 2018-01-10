@@ -67,7 +67,43 @@ public struct JavaModelRenderer: JavaFileRenderer {
         self.params = params
     }
 
-    func renderRoots() -> [JavaIR.JavaRoot] {
-        return []
+/*
+     @AutoValue
+     public abstract class Animal {
+     public abstract String name();
+     public abstract int numberOfLegs();
+
+     public static Builder builder() {
+     return new AutoValue_Animal.Builder();
+     }
+
+     abstract Builder toBuilder();
+
+     public Animal withName(String name) {
+     return toBuilder().setName(name).build();
+     }
+
+     @AutoValue.Builder
+     public abstract static class Builder {
+     public abstract Builder setName(String value);
+     public abstract Builder setNumberOfLegs(int value);
+     public abstract Animal build();
+     }
+     }
+
+ */
+
+    func renderRoots() -> [JavaIR.Root] {
+        let roots: [JavaIR.Root] = [
+            JavaIR.Root.classDecl(
+                aClass: JavaIR.Class(
+                    annotations: ["AutoValue"],
+                    extends: nil,
+                    name: self.className,
+                    innerClasses: []
+                )
+            )
+        ]
+        return roots
     }
 }

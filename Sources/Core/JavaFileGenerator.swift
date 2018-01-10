@@ -10,8 +10,10 @@ import Foundation
 struct JavaGeneratorManager: FileGeneratorManager {
 
     static func filesToGenerate(descriptor: SchemaObjectRoot, generatorParameters: GenerationParameters) -> [FileGenerator] {
+        let modelRenderer = JavaModelRenderer(rootSchema: descriptor, params: generatorParameters)
         return [
-            JavaFileGenerator(className: descriptor.className(with: generatorParameters))
+
+            JavaFileGenerator(roots: modelRenderer.renderRoots(), className: descriptor.className(with: generatorParameters))
         ]
     }
 
@@ -21,7 +23,7 @@ struct JavaGeneratorManager: FileGeneratorManager {
 }
 
 struct JavaFileGenerator: FileGenerator {
-
+    let roots: [JavaIR.Root]
     let className: String
 
     var fileName: String {
@@ -30,7 +32,13 @@ struct JavaFileGenerator: FileGenerator {
 
     func renderFile() -> String {
         // TODO: Update this
-        return self.renderCommentHeader()
+        return (
+            [self.renderCommentHeader()] +
+                self.roots.map { $0.renderImplementation().joined(separator: "\n") }
+            )
+            .map { $0.trimmingCharacters(in: CharacterSet.whitespaces) }
+            .filter { $0 != "" }
+            .joined(separator: "\n\n")
     }
 
     var indent: Int {

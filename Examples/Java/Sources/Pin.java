@@ -5,3 +5,7 @@
 //  DO NOT EDIT - EDITS WILL BE OVERWRITTEN
 //  @generated
 //
+
+@AutoValue
+public abstract class Pin {
+}
