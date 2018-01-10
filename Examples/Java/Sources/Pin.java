@@ -10,4 +10,45 @@ package com.pinterest.models;
 
 @AutoValue
 public abstract class Pin {
+    public abstract String note();
+    public abstract Map<String, String> media();
+    public abstract Map<String, Integer> counts();
+    public abstract String descriptionText();
+    public abstract Map<String, User> creator();
+    public abstract List<Map<String, Object>> tags();
+    public abstract Map<String, String> attribution();
+    public abstract Board board();
+    public abstract Map<String, Object> visualSearchAttrs();
+    public abstract String color();
+    public abstract URI link();
+    public abstract String identifier();
+    public abstract Image image();
+    public abstract Date createdAt();
+    public abstract List<PinAttributionObjects> attributionObjects();
+    public abstract URI url();
+    public static Builder builder() {
+        return new AutoValue_Pin.Builder();
+    }
+    abstract Builder toBuilder();
+    @AutoValue.Builder
+    public abstract class Builder {
+        public abstract Builder setNote(String value);
+        public abstract Builder setMedia(Map<String, String> value);
+        public abstract Builder setCounts(Map<String, Integer> value);
+        public abstract Builder setDescriptionText(String value);
+        public abstract Builder setCreator(Map<String, User> value);
+        public abstract Builder setTags(List<Map<String, Object>> value);
+        public abstract Builder setAttribution(Map<String, String> value);
+        public abstract Builder setBoard(Board value);
+        public abstract Builder setVisualSearchAttrs(Map<String, Object> value);
+        public abstract Builder setColor(String value);
+        public abstract Builder setLink(URI value);
+        public abstract Builder setIdentifier(String value);
+        public abstract Builder setImage(Image value);
+        public abstract Builder setCreatedAt(Date value);
+        public abstract Builder setAttributionObjects(List<PinAttributionObjects> value);
+        public abstract Builder setUrl(URI value);
+        public abstract Animal build();
+    
+    }
 }

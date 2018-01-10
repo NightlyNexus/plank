@@ -92,21 +92,64 @@ public struct JavaModelRenderer: JavaFileRenderer {
      }
 
  */
+    func renderBuilder() -> JavaIR.Method {
+        return JavaIR.method("public static Builder builder()") {[
+            "return new AutoValue_\(className).Builder();"
+        ]}
+    }
+
+    func renderBuilderBuild() -> JavaIR.Method {
+        return JavaIR.method("public abstract Animal build()") {[]}
+    }
+
+    func renderToBuilder() -> JavaIR.Method {
+        return JavaIR.method("abstract Builder toBuilder()") {[]}
+    }
+
+    func renderBuilderProperties() -> [JavaIR.Method] {
+        return self.properties.map { param, schemaObj in
+            JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
+        }
+    }
+
+    func renderModelProperties() -> [JavaIR.Method] {
+        return self.properties.map { param, schemaObj in
+            JavaIR.method("public abstract \(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
+
+        }
+    }
 
     func renderRoots() -> [JavaIR.Root] {
         let packages = self.params[.packageName].flatMap {
             [JavaIR.Root.packages(names: [$0])]
         } ?? []
 
-        let roots: [JavaIR.Root] = packages + [
-            JavaIR.Root.classDecl(
-                aClass: JavaIR.Class(
-                    annotations: ["AutoValue"],
-                    extends: nil,
-                    name: self.className,
-                    innerClasses: []
-                )
+        let builderClass = JavaIR.Class(
+            annotations: ["AutoValue.Builder"],
+            extends: nil,
+            name: "Builder",
+            methods: self.renderBuilderProperties() + [
+                self.renderBuilderBuild()
+            ],
+            innerClasses: []
+        )
+
+        let modelClass = JavaIR.Root.classDecl(
+            aClass: JavaIR.Class(
+                annotations: ["AutoValue"],
+                extends: nil,
+                name: self.className,
+                methods: self.renderModelProperties() + [
+                    self.renderBuilder(),
+                    self.renderToBuilder()
+                ],
+                innerClasses: [
+                    builderClass
+                ]
             )
+        )
+        let roots: [JavaIR.Root] = packages + [
+            modelClass
         ]
         return roots
     }

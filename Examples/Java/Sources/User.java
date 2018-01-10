@@ -10,4 +10,29 @@ package com.pinterest.models;
 
 @AutoValue
 public abstract class User {
+    public abstract String lastName();
+    public abstract String identifier();
+    public abstract String firstName();
+    public abstract Image image();
+    public abstract Map<String, Integer> counts();
+    public abstract Date createdAt();
+    public abstract String username();
+    public abstract String bio();
+    public static Builder builder() {
+        return new AutoValue_User.Builder();
+    }
+    abstract Builder toBuilder();
+    @AutoValue.Builder
+    public abstract class Builder {
+        public abstract Builder setLastName(String value);
+        public abstract Builder setIdentifier(String value);
+        public abstract Builder setFirstName(String value);
+        public abstract Builder setImage(Image value);
+        public abstract Builder setCounts(Map<String, Integer> value);
+        public abstract Builder setCreatedAt(Date value);
+        public abstract Builder setUsername(String value);
+        public abstract Builder setBio(String value);
+        public abstract Animal build();
+    
+    }
 }

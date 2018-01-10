@@ -46,9 +46,12 @@ public struct JavaIR {
         let signature: String
 
         func render() -> [String] {
+            // HACK: We should actually have an enum / optionset that we can check for abstract, static, ...
+            if signature.contains("abstract") {
+                return ["\(signature);"]
+            }
             return [
-                signature,
-                "{",
+                "\(signature) {",
                 -->body,
                 "}"
             ]
@@ -63,7 +66,17 @@ public struct JavaIR {
         let annotations: Set<String>
         let extends: String?
         let name: String
+        let methods: [JavaIR.Method]
         let innerClasses: [JavaIR.Class]
+
+        func render() -> [String] {
+            return annotations.map { "@\($0)" } + [
+                "public abstract class \(name) {",
+                -->methods.flatMap { $0.render() },
+                -->innerClasses.flatMap { $0.render() },
+                "}"
+            ]
+        }
     }
 
     enum Root: RootRenderer {
@@ -81,10 +94,7 @@ public struct JavaIR {
             case let .imports(names):
                 return names.map { "import \($0);" }
             case let .classDecl(aClass: cls):
-                return cls.annotations.map { "@\($0)" } + [
-                    "public abstract class \(cls.name) {",
-                    "}"
-                ]
+                return cls.render()
             case .enumDecl(_, _):
                 // TODO
                 break
