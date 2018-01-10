@@ -11,8 +11,16 @@ protocol JavaFileRenderer: FileRenderer {}
 
 extension JavaFileRenderer {
     func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String {
+        switch schema.nullability {
+        case .some(.nonnull):
+            return unwrappedTypeFromSchema(param, schema.schema)
+        case .some(.nullable), .none:
+            return "Optional<\(unwrappedTypeFromSchema(param, schema.schema))>"
+        }
+    }
+    fileprivate func unwrappedTypeFromSchema(_ param: String, _ schema: Schema) -> String {
         // TODO: Figure out if "Optional" goes here
-        switch schema.schema {
+        switch schema {
         case .array(itemType: .none):
             return "List<Object>"
         case .array(itemType: .some(let itemType)):
@@ -107,9 +115,19 @@ public struct JavaModelRenderer: JavaFileRenderer {
     }
 
     func renderBuilderProperties() -> [JavaIR.Method] {
-        return self.properties.map { param, schemaObj in
+        // We lose the nullability information here since AutoValue can handle both
+        // setFoo(Optional<T> value) and setFoo(T value)
+        // https://github.com/google/auto/blob/master/value/userguide/builders-howto.md#-handle-optional-properties
+        let props = self.properties.map { param, schemaObj in
             JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
         }
+
+        let convenienceProps = self.properties.filter { _, schemaObj in
+            return schemaObj.nullability == nil || schemaObj.nullability == .nullable
+        }.map { param, schemaObj in
+                JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
+        }
+        return props + convenienceProps
     }
 
     func renderModelProperties() -> [JavaIR.Method] {

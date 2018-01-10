@@ -10,15 +10,18 @@ package com.pinterest.models;
 
 @AutoValue
 public abstract class Image {
-    public abstract Integer height();
-    public abstract URI url();
-    public abstract Integer width();
+    public abstract Optional<Integer> height();
+    public abstract Optional<URI> url();
+    public abstract Optional<Integer> width();
     public static Builder builder() {
         return new AutoValue_Image.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract class Builder {
+        public abstract Builder setHeight(Optional<Integer> value);
+        public abstract Builder setUrl(Optional<URI> value);
+        public abstract Builder setWidth(Optional<Integer> value);
         public abstract Builder setHeight(Integer value);
         public abstract Builder setUrl(URI value);
         public abstract Builder setWidth(Integer value);
