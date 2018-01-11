@@ -44,17 +44,6 @@ public struct JavaIR {
         let values: EnumType
 
         func render() -> [String] {
-            /*
-             public static final String NETWORK_NONE = "none";
-             public static final String NETWORK_UNKNOWN = "unknown";
-             public static final String NETWORK_2G = "2g";
-             public static final String NETWORK_3G = "3g";
-             public static final String NETWORK_4G = "4g";
-             public static final String NETWORK_WIFI = "WiFi";
-             @StringDef({NETWORK_NONE, NETWORK_UNKNOWN, NETWORK_2G, NETWORK_3G, NETWORK_4G, NETWORK_WIFI})
-             @Retention(RetentionPolicy.SOURCE)
-             public @interface NetworkClass {}
-             */
             switch values {
             case let .integer(values):
                 let names = values
