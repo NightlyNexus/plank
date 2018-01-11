@@ -13,6 +13,15 @@ struct JavaModifier: OptionSet {
     static let abstract = JavaModifier(rawValue: 1 << 1)
     static let final = JavaModifier(rawValue: 1 << 2)
     static let `static` = JavaModifier(rawValue: 1 << 3)
+
+    func render() -> String {
+        return [
+            self.contains(.public) ? "public" : "",
+            self.contains(.abstract) ? "abstract" : "",
+            self.contains(.static) ? "static" : "",
+            self.contains(.final) ? "final" : ""
+        ].filter { $0 != "" }.joined(separator: " ")
+    }
 }
 
 public struct JavaIR {
@@ -37,13 +46,7 @@ public struct JavaIR {
     }
 
     static func method(annotations: Set<String> = [], _ modifiers: JavaModifier, _ signature: String, body: () -> [String]) -> JavaIR.Method {
-        let signatureModifiers = [
-            modifiers.contains(.public) ? "public" : "",
-            modifiers.contains(.abstract) ? "abstract" : "",
-            modifiers.contains(.static) ? "static" : "",
-            modifiers.contains(.final) ? "final" : ""
-        ].filter { $0 != "" }.joined(separator: " ")
-        return JavaIR.Method(annotations: annotations, body: body(), signature: "\(signatureModifiers) \(signature)")
+        return JavaIR.Method(annotations: annotations, body: body(), signature: "\(modifiers.render()) \(signature)")
     }
 
     struct Enum {
@@ -83,6 +86,7 @@ public struct JavaIR {
 
     struct Class {
         let annotations: Set<String>
+        let modifiers: JavaModifier
         let extends: String?
         let name: String
         let methods: [JavaIR.Method]
@@ -91,7 +95,7 @@ public struct JavaIR {
 
         func render() -> [String] {
             return annotations.map { "@\($0)" } + [
-                "public abstract class \(name) {",
+                "\(modifiers.render()) class \(name) {",
                 -->enums.flatMap { $0.render() },
                 -->methods.flatMap { $0.render() },
                 -->innerClasses.flatMap { $0.render() },

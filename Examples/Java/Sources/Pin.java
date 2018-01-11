@@ -50,7 +50,7 @@ public abstract class Pin {
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract class Builder {
+    public abstract static class Builder {
     
         public abstract Builder setNote(Optional<String> value);
         public abstract Builder setMedia(Optional<Map<String, String>> value);

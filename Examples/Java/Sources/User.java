@@ -42,7 +42,7 @@ public abstract class User {
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract class Builder {
+    public abstract static class Builder {
     
         public abstract Builder setEmailInterval(Optional<@UserEmailIntervalType String> value);
         public abstract Builder setLastName(Optional<String> value);

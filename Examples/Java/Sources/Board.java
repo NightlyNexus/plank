@@ -37,7 +37,7 @@ public abstract class Board {
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract class Builder {
+    public abstract static class Builder {
     
         public abstract Builder setName(Optional<String> value);
         public abstract Builder setIdentifier(Optional<String> value);

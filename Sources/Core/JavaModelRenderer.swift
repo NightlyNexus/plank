@@ -152,6 +152,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
 
         let builderClass = JavaIR.Class(
             annotations: ["AutoValue.Builder"],
+            modifiers: [.public, .abstract, .static],
             extends: nil,
             name: "Builder",
             methods: self.renderBuilderProperties() + [
@@ -164,6 +165,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let modelClass = JavaIR.Root.classDecl(
             aClass: JavaIR.Class(
                 annotations: ["AutoValue"],
+                modifiers: [.public, .abstract],
                 extends: nil,
                 name: self.className,
                 methods: self.renderModelProperties() + [

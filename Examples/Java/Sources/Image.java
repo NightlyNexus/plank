@@ -31,7 +31,7 @@ public abstract class Image {
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract class Builder {
+    public abstract static class Builder {
     
         public abstract Builder setHeight(Optional<Integer> value);
         public abstract Builder setUrl(Optional<URI> value);
