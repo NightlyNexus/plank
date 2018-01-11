@@ -82,22 +82,22 @@ public struct JavaModelRenderer: JavaFileRenderer {
     }
 
     func renderBuilder() -> JavaIR.Method {
-        return JavaIR.method("public static Builder builder()") {[
+        return JavaIR.method([.public, .static], "Builder builder()") {[
             "return new AutoValue_\(className).Builder();"
         ]}
     }
 
     func renderBuilderBuild() -> JavaIR.Method {
-        return JavaIR.method("public abstract \(self.className) build()") {[]}
+        return JavaIR.method([.public, .abstract], "\(self.className) build()") {[]}
     }
 
     func renderToBuilder() -> JavaIR.Method {
-        return JavaIR.method("abstract Builder toBuilder()") {[]}
+        return JavaIR.method([.abstract], "Builder toBuilder()") {[]}
     }
 
     func renderBuilderProperties() -> [JavaIR.Method] {
         let props = self.properties.map { param, schemaObj in
-            JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
+            JavaIR.method([.public, .abstract], "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
         }
         // We add a convenience setter for Optional types since AutoValue can handle both
         // setFoo(Optional<T> value) and setFoo(T value)
@@ -105,14 +105,14 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let convenienceProps = self.properties.filter { _, schemaObj in
             return schemaObj.nullability == nil || schemaObj.nullability == .nullable
         }.map { param, schemaObj in
-            JavaIR.method("public abstract Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
+            JavaIR.method([.public, .abstract], "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
         }
         return props + convenienceProps
     }
 
     func renderModelProperties() -> [JavaIR.Method] {
         return self.properties.map { param, schemaObj in
-            JavaIR.method("public abstract \(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
+            JavaIR.method([.public, .abstract], "\(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
         }
     }
 

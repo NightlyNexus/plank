@@ -7,11 +7,12 @@
 
 import Foundation
 
-public enum JavaVisibility: String {
-    case `public`
-    case protected
-    case `private`
-
+struct JavaModifier: OptionSet {
+    let rawValue: Int
+    static let `public` = JavaModifier(rawValue: 1 << 0)
+    static let abstract = JavaModifier(rawValue: 1 << 1)
+    static let final = JavaModifier(rawValue: 1 << 2)
+    static let `static` = JavaModifier(rawValue: 1 << 3)
 }
 
 public struct JavaIR {
@@ -35,8 +36,14 @@ public struct JavaIR {
         }
     }
 
-    static func method(annotations: Set<String> = [], _ signature: String, body: () -> [String]) -> JavaIR.Method {
-        return JavaIR.Method(annotations: annotations, body: body(), signature: signature)
+    static func method(annotations: Set<String> = [], _ modifiers: JavaModifier, _ signature: String, body: () -> [String]) -> JavaIR.Method {
+        let signatureModifiers = [
+            modifiers.contains(.public) ? "public" : "",
+            modifiers.contains(.abstract) ? "abstract" : "",
+            modifiers.contains(.static) ? "static" : "",
+            modifiers.contains(.final) ? "final" : ""
+        ].filter { $0 != "" }.joined(separator: " ")
+        return JavaIR.Method(annotations: annotations, body: body(), signature: "\(signatureModifiers) \(signature)")
     }
 
     struct Enum {
