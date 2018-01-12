@@ -10,6 +10,10 @@ import Foundation
 protocol JavaFileRenderer: FileRenderer {}
 
 extension JavaFileRenderer {
+    func interfaceName() -> String {
+        return "I\(self.className)"
+    }
+
     func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String {
         switch schema.nullability {
         case .some(.nonnull):
@@ -116,6 +120,12 @@ public struct JavaModelRenderer: JavaFileRenderer {
         }
     }
 
+    func renderInterfaceProperties() -> [JavaIR.Method] {
+        return self.properties.map { param, schemaObj in
+            JavaIR.method([], "\(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
+        }
+    }
+
     func renderRoots() -> [JavaIR.Root] {
         let packages = self.params[.packageName].flatMap {
             [JavaIR.Root.packages(names: [$0])]
@@ -154,6 +164,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
             annotations: ["AutoValue.Builder"],
             modifiers: [.public, .abstract, .static],
             extends: nil,
+            implements: nil,
             name: "Builder",
             methods: self.renderBuilderProperties() + [
                 self.renderBuilderBuild()
@@ -162,11 +173,20 @@ public struct JavaModelRenderer: JavaFileRenderer {
             innerClasses: []
         )
 
+        let modelInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
+                modifiers: [.public],
+                extends: nil,
+                name: self.interfaceName(),
+                methods: self.renderInterfaceProperties()
+            )
+        )
+
         let modelClass = JavaIR.Root.classDecl(
             aClass: JavaIR.Class(
                 annotations: ["AutoValue"],
                 modifiers: [.public, .abstract],
                 extends: nil,
+                implements: resolveClassName(self.parentDescriptor).map { [$0] },
                 name: self.className,
                 methods: self.renderModelProperties() + [
                     self.renderBuilder(),
@@ -182,7 +202,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let roots: [JavaIR.Root] =
             packages +
             imports +
-            [modelClass]
+            [modelInterface, modelClass]
         return roots
     }
 }

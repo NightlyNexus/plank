@@ -28,17 +28,19 @@ public struct JavaIR {
 
     public struct Method {
         let annotations: Set<String>
+        let modifiers: JavaModifier
         let body: [String]
         let signature: String
 
         func render() -> [String] {
             // HACK: We should actually have an enum / optionset that we can check for abstract, static, ...
             let annotationLines = annotations.map { "@\($0)" }
-            if signature.contains("abstract") {
-                return annotationLines + ["\(signature);"]
+
+            if modifiers.contains(.abstract) {
+                return annotationLines + ["\(modifiers.render()) \(signature);"]
             }
             return annotationLines + [
-                "\(signature) {",
+                "\(modifiers.render()) \(signature) {",
                 -->body,
                 "}"
             ]
@@ -46,7 +48,7 @@ public struct JavaIR {
     }
 
     static func method(annotations: Set<String> = [], _ modifiers: JavaModifier, _ signature: String, body: () -> [String]) -> JavaIR.Method {
-        return JavaIR.Method(annotations: annotations, body: body(), signature: "\(modifiers.render()) \(signature)")
+        return JavaIR.Method(annotations: annotations, modifiers: modifiers, body: body(), signature: signature)
     }
 
     struct Enum {
@@ -88,14 +90,17 @@ public struct JavaIR {
         let annotations: Set<String>
         let modifiers: JavaModifier
         let extends: String?
+        let implements: [String]?
         let name: String
         let methods: [JavaIR.Method]
         let enums: [Enum]
         let innerClasses: [JavaIR.Class]
 
         func render() -> [String] {
+            let implementsList = implements?.joined(separator: ", ") ?? ""
+            let implementsStmt = implementsList == "" ? "" : "implements \(implementsList)"
             return annotations.map { "@\($0)" } + [
-                "\(modifiers.render()) class \(name) {",
+                "\(modifiers.render()) class \(name) \(implementsStmt) {",
                 -->enums.flatMap { $0.render() },
                 -->methods.flatMap { $0.render() },
                 -->innerClasses.flatMap { $0.render() },
@@ -104,12 +109,26 @@ public struct JavaIR {
         }
     }
 
+    struct Interface {
+        let modifiers: JavaModifier
+        let extends: String?
+        let name: String
+        let methods: [JavaIR.Method]
+
+        func render() -> [String] {
+            return [
+                "\(modifiers.render()) interface \(name) {",
+                -->methods.flatMap { "\($0.signature);" },
+                "}"
+            ]
+        }
+    }
+
     enum Root: RootRenderer {
         case packages(names: Set<String>)
         case imports(names: Set<String>)
-        case classDecl(
-            aClass: JavaIR.Class
-        )
+        case classDecl(aClass: JavaIR.Class)
+        case interfaceDecl(aInterface: JavaIR.Interface)
 
         func renderImplementation() -> [String] {
             switch self {
@@ -119,6 +138,8 @@ public struct JavaIR {
                 return names.map { "import \($0);" }
             case let .classDecl(aClass: cls):
                 return cls.render()
+            case let .interfaceDecl(aInterface: interface):
+                return interface.render()
             }
         }
     }

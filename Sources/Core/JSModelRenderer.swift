@@ -18,18 +18,6 @@ public struct JSModelRenderer: JSFileRenderer {
     }
 
     func renderRoots() -> [JSIR.Root] {
-
-        func resolveClassName(_ schema: Schema?) -> String? {
-            switch schema {
-            case .some(.object(let root)):
-                return root.className(with: self.params)
-            case .some(.reference(with: let ref)):
-                return resolveClassName(ref.force())
-            default:
-                return nil
-            }
-        }
-
         let parentName = resolveClassName(self.parentDescriptor)
         let props: [SimpleProperty] = properties.map { param, prop in
             return (param, typeFromSchema(param, prop), prop, .readonly)

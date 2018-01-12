@@ -13,7 +13,6 @@ import type { UserType } from './UserType.js';
 
 export type BoardType = $Shape<{|
   +name: ?string,
-  +id: ?string,
   +image: ImageType,
   +counts: ?{ +[string]: number } /* Integer */,
   +created_at: ?PlankDate,

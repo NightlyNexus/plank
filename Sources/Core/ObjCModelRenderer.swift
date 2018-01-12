@@ -120,17 +120,6 @@ public struct ObjCModelRenderer: ObjCFileRenderer {
             "NSCopying": [ObjCIR.method("- (id)copyWithZone:(NSZone *)zone") { ["return self;"] }]
         ]
 
-        func resolveClassName(_ schema: Schema?) -> String? {
-            switch schema {
-            case .some(.object(let root)):
-                return root.className(with: self.params)
-            case .some(.reference(with: let ref)):
-                return resolveClassName(ref.force())
-            default:
-                return nil
-            }
-        }
-
         let parentName = resolveClassName(self.parentDescriptor)
         let enumRoots = self.properties.flatMap { (param, prop) -> [ObjCIR.Root] in
             switch prop.schema {

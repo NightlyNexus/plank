@@ -37,6 +37,7 @@ struct JavaFileGenerator: FileGenerator {
                 self.roots.map { $0.renderImplementation().joined(separator: "\n") }
             )
             .map { $0.trimmingCharacters(in: CharacterSet.whitespaces) }
+            .map { $0.replacingOccurrences(of: "  ", with: " ") }
             .filter { $0 != "" }
             .joined(separator: "\n\n")
     }
