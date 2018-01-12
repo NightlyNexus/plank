@@ -7,75 +7,6 @@
 
 import Foundation
 
-protocol JavaFileRenderer: FileRenderer {}
-
-extension JavaFileRenderer {
-    func interfaceName() -> String {
-        return "I\(self.className)"
-    }
-
-    func typeFromSchema(_ param: String, _ schema: SchemaObjectProperty) -> String {
-        switch schema.nullability {
-        case .some(.nonnull):
-            return unwrappedTypeFromSchema(param, schema.schema)
-        case .some(.nullable), .none:
-            return "Optional<\(unwrappedTypeFromSchema(param, schema.schema))>"
-        }
-    }
-    fileprivate func unwrappedTypeFromSchema(_ param: String, _ schema: Schema) -> String {
-        // TODO: Figure out if "Optional" goes here
-        switch schema {
-        case .array(itemType: .none):
-            return "List<Object>"
-        case .array(itemType: .some(let itemType)):
-            return "List<\(typeFromSchema(param, itemType.nonnullProperty()))>"
-        case .set(itemType: .none):
-            return "Set<Object>"
-        case .set(itemType: .some(let itemType)):
-            return "Set<\(typeFromSchema(param, itemType.nonnullProperty()))>"
-        case .map(valueType: .none):
-            return "Map<String, Object>"
-        case .map(valueType: .some(let valueType)):
-            return "Map<String, \(typeFromSchema(param, valueType.nonnullProperty()))>"
-        case .string(format: .none),
-             .string(format: .some(.email)),
-             .string(format: .some(.hostname)),
-             .string(format: .some(.ipv4)),
-             .string(format: .some(.ipv6)):
-            return "String"
-        case .string(format: .some(.dateTime)):
-            return "Date"
-        case .string(format: .some(.uri)):
-            return "URI"
-        case .integer:
-            return "Integer"
-        case .float:
-            return "Double"
-        case .boolean:
-            return "Boolean"
-        case .enumT(let enumObj):
-            let enumName = enumTypeName(propertyName: param, className: className)
-            switch enumObj {
-            case .integer(_):
-                return "@\(enumName) int"
-            case .string(_, defaultValue: _):
-                return "@\(enumName) String"
-            }
-        case .object(let objSchemaRoot):
-            return "\(objSchemaRoot.className(with: params))"
-        case .reference(with: let ref):
-            switch ref.force() {
-            case .some(.object(let schemaRoot)):
-                return typeFromSchema(param, (.object(schemaRoot) as Schema).nonnullProperty())
-            default:
-                fatalError("Bad reference found in schema for class: \(className)")
-            }
-        case .oneOf(types:_):
-            return "\(className)\(param.snakeCaseToCamelCase())"
-        }
-    }
-}
-
 public struct JavaModelRenderer: JavaFileRenderer {
     let rootSchema: SchemaObjectRoot
     let params: GenerationParameters
@@ -99,9 +30,9 @@ public struct JavaModelRenderer: JavaFileRenderer {
         return JavaIR.method([.abstract], "Builder toBuilder()") {[]}
     }
 
-    func renderBuilderProperties() -> [JavaIR.Method] {
+    func renderBuilderProperties(modifiers: JavaModifier = [.public, .abstract]) -> [JavaIR.Method] {
         let props = self.properties.map { param, schemaObj in
-            JavaIR.method([.public, .abstract], "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
+            JavaIR.method(modifiers, "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
         }
         // We add a convenience setter for Optional types since AutoValue can handle both
         // setFoo(Optional<T> value) and setFoo(T value)
@@ -109,21 +40,23 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let convenienceProps = self.properties.filter { _, schemaObj in
             return schemaObj.nullability == nil || schemaObj.nullability == .nullable
         }.map { param, schemaObj in
-            JavaIR.method([.public, .abstract], "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
+            JavaIR.method(modifiers, "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
         }
         return props + convenienceProps
     }
 
-    func renderModelProperties() -> [JavaIR.Method] {
+    func renderBuilderInterfaceProperties() -> [JavaIR.Method] {
+        return self.renderBuilderProperties(modifiers: [])
+    }
+
+    func renderModelProperties(modifiers: JavaModifier = [.public, .abstract]) -> [JavaIR.Method] {
         return self.properties.map { param, schemaObj in
-            JavaIR.method([.public, .abstract], "\(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
+            JavaIR.method(modifiers, "\(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
         }
     }
 
     func renderInterfaceProperties() -> [JavaIR.Method] {
-        return self.properties.map { param, schemaObj in
-            JavaIR.method([], "\(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
-        }
+        return self.renderModelProperties(modifiers: [])
     }
 
     func renderRoots() -> [JavaIR.Root] {
@@ -160,19 +93,6 @@ public struct JavaModelRenderer: JavaFileRenderer {
             }
         }
 
-        let builderClass = JavaIR.Class(
-            annotations: ["AutoValue.Builder"],
-            modifiers: [.public, .abstract, .static],
-            extends: nil,
-            implements: nil,
-            name: "Builder",
-            methods: self.renderBuilderProperties() + [
-                self.renderBuilderBuild()
-            ],
-            enums: [],
-            innerClasses: []
-        )
-
         let modelInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
                 modifiers: [.public],
                 extends: nil,
@@ -181,12 +101,33 @@ public struct JavaModelRenderer: JavaFileRenderer {
             )
         )
 
+        let builderInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
+            modifiers: [.public],
+            extends: nil,
+            name: self.builderInterfaceName(),
+            methods: self.renderBuilderInterfaceProperties()
+            )
+        )
+
+        let builderClass = JavaIR.Class(
+            annotations: ["AutoValue.Builder"],
+            modifiers: [.public, .abstract, .static],
+            extends: nil,
+            implements: self.builderInterfaceName(self.parentDescriptor).map { [$0] },
+            name: "Builder",
+            methods: self.renderBuilderProperties() + [
+                self.renderBuilderBuild()
+            ],
+            enums: [],
+            innerClasses: []
+        )
+
         let modelClass = JavaIR.Root.classDecl(
             aClass: JavaIR.Class(
                 annotations: ["AutoValue"],
                 modifiers: [.public, .abstract],
                 extends: nil,
-                implements: resolveClassName(self.parentDescriptor).map { [$0] },
+                implements: self.interfaceName(self.parentDescriptor).map { [$0] },
                 name: self.className,
                 methods: self.renderModelProperties() + [
                     self.renderBuilder(),
@@ -202,7 +143,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let roots: [JavaIR.Root] =
             packages +
             imports +
-            [modelInterface, modelClass]
+            [modelInterface, builderInterface, modelClass]
         return roots
     }
 }

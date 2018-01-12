@@ -90,7 +90,7 @@ public struct JavaIR {
         let annotations: Set<String>
         let modifiers: JavaModifier
         let extends: String?
-        let implements: [String]?
+        let implements: [String]? // Should this be JavaIR.Interface?
         let name: String
         let methods: [JavaIR.Method]
         let enums: [Enum]

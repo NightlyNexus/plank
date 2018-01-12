@@ -20,10 +20,19 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface IImage {
+public interface ImageModel {
     Optional<Integer> height();
     Optional<URI> url();
     Optional<Integer> width();
+}
+
+public interface ImageModelBuilder {
+    Builder setHeight(Optional<Integer> value);
+    Builder setUrl(Optional<URI> value);
+    Builder setWidth(Optional<Integer> value);
+    Builder setHeight(Integer value);
+    Builder setUrl(URI value);
+    Builder setWidth(Integer value);
 }
 
 @AutoValue

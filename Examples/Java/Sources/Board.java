@@ -20,7 +20,7 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface IBoard {
+public interface BoardModel {
     Optional<String> name();
     Image image();
     Optional<Map<String, Integer>> counts();
@@ -31,8 +31,26 @@ public interface IBoard {
     Optional<URI> url();
 }
 
+public interface BoardModelBuilder {
+    Builder setName(Optional<String> value);
+    Builder setImage(Image value);
+    Builder setCounts(Optional<Map<String, Integer>> value);
+    Builder setCreatedAt(Optional<Date> value);
+    Builder setContributors(Optional<Set<User>> value);
+    Builder setDescriptionText(Optional<String> value);
+    Builder setCreator(Optional<Map<String, String>> value);
+    Builder setUrl(Optional<URI> value);
+    Builder setName(String value);
+    Builder setCounts(Map<String, Integer> value);
+    Builder setCreatedAt(Date value);
+    Builder setContributors(Set<User> value);
+    Builder setDescriptionText(String value);
+    Builder setCreator(Map<String, String> value);
+    Builder setUrl(URI value);
+}
+
 @AutoValue
-public abstract class Board implements Model {
+public abstract class Board implements ModelModel {
 
     public abstract Optional<String> name();
     public abstract Image image();
@@ -47,7 +65,7 @@ public abstract class Board implements Model {
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract static class Builder {
+    public abstract static class Builder implements ModelModelBuilder {
     
         public abstract Builder setName(Optional<String> value);
         public abstract Builder setImage(Image value);

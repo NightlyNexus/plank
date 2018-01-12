@@ -20,7 +20,7 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface IUser {
+public interface UserModel {
     Optional<@UserEmailIntervalType String> emailInterval();
     Optional<String> lastName();
     Optional<String> identifier();
@@ -30,6 +30,27 @@ public interface IUser {
     Optional<String> firstName();
     Optional<String> bio();
     Optional<String> username();
+}
+
+public interface UserModelBuilder {
+    Builder setEmailInterval(Optional<@UserEmailIntervalType String> value);
+    Builder setLastName(Optional<String> value);
+    Builder setIdentifier(Optional<String> value);
+    Builder setImage(Optional<Image> value);
+    Builder setCounts(Optional<Map<String, Integer>> value);
+    Builder setCreatedAt(Optional<Date> value);
+    Builder setFirstName(Optional<String> value);
+    Builder setBio(Optional<String> value);
+    Builder setUsername(Optional<String> value);
+    Builder setEmailInterval(@UserEmailIntervalType String value);
+    Builder setLastName(String value);
+    Builder setIdentifier(String value);
+    Builder setImage(Image value);
+    Builder setCounts(Map<String, Integer> value);
+    Builder setCreatedAt(Date value);
+    Builder setFirstName(String value);
+    Builder setBio(String value);
+    Builder setUsername(String value);
 }
 
 @AutoValue

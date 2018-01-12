@@ -20,8 +20,13 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface IModel {
+public interface ModelModel {
     Optional<String> identifier();
+}
+
+public interface ModelModelBuilder {
+    Builder setIdentifier(Optional<String> value);
+    Builder setIdentifier(String value);
 }
 
 @AutoValue

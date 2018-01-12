@@ -31,7 +31,6 @@ struct JavaFileGenerator: FileGenerator {
     }
 
     func renderFile() -> String {
-        // TODO: Update this
         return (
             [self.renderCommentHeader()] +
                 self.roots.map { $0.renderImplementation().joined(separator: "\n") }

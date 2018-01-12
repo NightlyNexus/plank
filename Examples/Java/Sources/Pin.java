@@ -20,7 +20,7 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface IPin {
+public interface PinModel {
     Optional<String> note();
     Optional<Map<String, String>> media();
     Optional<Map<String, Integer>> counts();
@@ -38,6 +38,40 @@ public interface IPin {
     Date createdAt();
     Optional<List<PinAttributionObjects>> attributionObjects();
     Optional<URI> url();
+}
+
+public interface PinModelBuilder {
+    Builder setNote(Optional<String> value);
+    Builder setMedia(Optional<Map<String, String>> value);
+    Builder setCounts(Optional<Map<String, Integer>> value);
+    Builder setDescriptionText(Optional<String> value);
+    Builder setCreator(Map<String, User> value);
+    Builder setInStock(Optional<@PinInStockType int> value);
+    Builder setAttribution(Optional<Map<String, String>> value);
+    Builder setTags(Optional<List<Map<String, Object>>> value);
+    Builder setVisualSearchAttrs(Optional<Map<String, Object>> value);
+    Builder setBoard(Optional<Board> value);
+    Builder setLink(Optional<URI> value);
+    Builder setColor(Optional<String> value);
+    Builder setIdentifier(String value);
+    Builder setImage(Optional<Image> value);
+    Builder setCreatedAt(Date value);
+    Builder setAttributionObjects(Optional<List<PinAttributionObjects>> value);
+    Builder setUrl(Optional<URI> value);
+    Builder setNote(String value);
+    Builder setMedia(Map<String, String> value);
+    Builder setCounts(Map<String, Integer> value);
+    Builder setDescriptionText(String value);
+    Builder setInStock(@PinInStockType int value);
+    Builder setAttribution(Map<String, String> value);
+    Builder setTags(List<Map<String, Object>> value);
+    Builder setVisualSearchAttrs(Map<String, Object> value);
+    Builder setBoard(Board value);
+    Builder setLink(URI value);
+    Builder setColor(String value);
+    Builder setImage(Image value);
+    Builder setAttributionObjects(List<PinAttributionObjects> value);
+    Builder setUrl(URI value);
 }
 
 @AutoValue

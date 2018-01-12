@@ -144,6 +144,7 @@ extension FileGenerator {
             "// @generated",
             "//"
         ]
+
         return header.joined(separator: "\n")
     }
 }
