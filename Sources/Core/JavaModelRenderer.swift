@@ -71,12 +71,12 @@ public struct JavaModelRenderer: JavaFileRenderer {
                 "java.util.Map",
                 "java.util.Set",
                 "java.util.List",
-                "java.util.Optional",
                 "java.net.URI",
                 "java.lang.annotation.Retention",
                 "java.lang.annotation.RetentionPolicy",
-                "android.support.annotation.StringDef",
-                "android.support.annotation.IntDef"
+                "android.support.annotation.IntDef",
+                "android.support.annotation.Nullable",
+                "android.support.annotation.StringDef"
             ])
         ]
 

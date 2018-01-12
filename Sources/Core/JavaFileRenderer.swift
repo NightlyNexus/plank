@@ -45,7 +45,7 @@ extension JavaFileRenderer {
         case .some(.nonnull):
             return unwrappedTypeFromSchema(param, schema.schema)
         case .some(.nullable), .none:
-            return "Optional<\(unwrappedTypeFromSchema(param, schema.schema))>"
+            return "@Nullable \(unwrappedTypeFromSchema(param, schema.schema))"
         }
     }
     fileprivate func unwrappedTypeFromSchema(_ param: String, _ schema: Schema) -> String {

@@ -10,9 +10,9 @@ package com.pinterest.models;
 
 import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
-import java.util.Optional;
-import java.util.Set;
 import java.net.URI;
+import java.util.Set;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.util.Date;
@@ -21,25 +21,25 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface BoardModel {
-    Optional<String> name();
+    @Nullable String name();
     Image image();
-    Optional<Map<String, Integer>> counts();
-    Optional<Date> createdAt();
-    Optional<Set<User>> contributors();
-    Optional<String> descriptionText();
-    Optional<Map<String, String>> creator();
-    Optional<URI> url();
+    @Nullable Map<String, Integer> counts();
+    @Nullable Date createdAt();
+    @Nullable Set<User> contributors();
+    @Nullable String descriptionText();
+    @Nullable Map<String, String> creator();
+    @Nullable URI url();
 }
 
 public interface BoardModelBuilder {
-    Builder setName(Optional<String> value);
+    Builder setName(@Nullable String value);
     Builder setImage(Image value);
-    Builder setCounts(Optional<Map<String, Integer>> value);
-    Builder setCreatedAt(Optional<Date> value);
-    Builder setContributors(Optional<Set<User>> value);
-    Builder setDescriptionText(Optional<String> value);
-    Builder setCreator(Optional<Map<String, String>> value);
-    Builder setUrl(Optional<URI> value);
+    Builder setCounts(@Nullable Map<String, Integer> value);
+    Builder setCreatedAt(@Nullable Date value);
+    Builder setContributors(@Nullable Set<User> value);
+    Builder setDescriptionText(@Nullable String value);
+    Builder setCreator(@Nullable Map<String, String> value);
+    Builder setUrl(@Nullable URI value);
     Builder setName(String value);
     Builder setCounts(Map<String, Integer> value);
     Builder setCreatedAt(Date value);
@@ -52,14 +52,14 @@ public interface BoardModelBuilder {
 @AutoValue
 public abstract class Board implements ModelModel {
 
-    public abstract Optional<String> name();
+    public abstract @Nullable String name();
     public abstract Image image();
-    public abstract Optional<Map<String, Integer>> counts();
-    public abstract Optional<Date> createdAt();
-    public abstract Optional<Set<User>> contributors();
-    public abstract Optional<String> descriptionText();
-    public abstract Optional<Map<String, String>> creator();
-    public abstract Optional<URI> url();
+    public abstract @Nullable Map<String, Integer> counts();
+    public abstract @Nullable Date createdAt();
+    public abstract @Nullable Set<User> contributors();
+    public abstract @Nullable String descriptionText();
+    public abstract @Nullable Map<String, String> creator();
+    public abstract @Nullable URI url();
     public static Builder builder() {
         return new AutoValue_Board.Builder();
     }
@@ -67,14 +67,14 @@ public abstract class Board implements ModelModel {
     @AutoValue.Builder
     public abstract static class Builder implements ModelModelBuilder {
     
-        public abstract Builder setName(Optional<String> value);
+        public abstract Builder setName(@Nullable String value);
         public abstract Builder setImage(Image value);
-        public abstract Builder setCounts(Optional<Map<String, Integer>> value);
-        public abstract Builder setCreatedAt(Optional<Date> value);
-        public abstract Builder setContributors(Optional<Set<User>> value);
-        public abstract Builder setDescriptionText(Optional<String> value);
-        public abstract Builder setCreator(Optional<Map<String, String>> value);
-        public abstract Builder setUrl(Optional<URI> value);
+        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
+        public abstract Builder setCreatedAt(@Nullable Date value);
+        public abstract Builder setContributors(@Nullable Set<User> value);
+        public abstract Builder setDescriptionText(@Nullable String value);
+        public abstract Builder setCreator(@Nullable Map<String, String> value);
+        public abstract Builder setUrl(@Nullable URI value);
         public abstract Builder setName(String value);
         public abstract Builder setCounts(Map<String, Integer> value);
         public abstract Builder setCreatedAt(Date value);

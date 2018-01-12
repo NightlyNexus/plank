@@ -10,9 +10,9 @@ package com.pinterest.models;
 
 import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
-import java.util.Optional;
-import java.util.Set;
 import java.net.URI;
+import java.util.Set;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.util.Date;
@@ -21,27 +21,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface UserModel {
-    Optional<@UserEmailIntervalType String> emailInterval();
-    Optional<String> lastName();
-    Optional<String> identifier();
-    Optional<Image> image();
-    Optional<Map<String, Integer>> counts();
-    Optional<Date> createdAt();
-    Optional<String> firstName();
-    Optional<String> bio();
-    Optional<String> username();
+    @Nullable @UserEmailIntervalType String emailInterval();
+    @Nullable String lastName();
+    @Nullable String identifier();
+    @Nullable Image image();
+    @Nullable Map<String, Integer> counts();
+    @Nullable Date createdAt();
+    @Nullable String firstName();
+    @Nullable String bio();
+    @Nullable String username();
 }
 
 public interface UserModelBuilder {
-    Builder setEmailInterval(Optional<@UserEmailIntervalType String> value);
-    Builder setLastName(Optional<String> value);
-    Builder setIdentifier(Optional<String> value);
-    Builder setImage(Optional<Image> value);
-    Builder setCounts(Optional<Map<String, Integer>> value);
-    Builder setCreatedAt(Optional<Date> value);
-    Builder setFirstName(Optional<String> value);
-    Builder setBio(Optional<String> value);
-    Builder setUsername(Optional<String> value);
+    Builder setEmailInterval(@Nullable @UserEmailIntervalType String value);
+    Builder setLastName(@Nullable String value);
+    Builder setIdentifier(@Nullable String value);
+    Builder setImage(@Nullable Image value);
+    Builder setCounts(@Nullable Map<String, Integer> value);
+    Builder setCreatedAt(@Nullable Date value);
+    Builder setFirstName(@Nullable String value);
+    Builder setBio(@Nullable String value);
+    Builder setUsername(@Nullable String value);
     Builder setEmailInterval(@UserEmailIntervalType String value);
     Builder setLastName(String value);
     Builder setIdentifier(String value);
@@ -61,15 +61,15 @@ public abstract class User {
     @StringDef({UNSET, IMMEDIATE, DAILY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface UserEmailIntervalType {}
-    public abstract Optional<@UserEmailIntervalType String> emailInterval();
-    public abstract Optional<String> lastName();
-    public abstract Optional<String> identifier();
-    public abstract Optional<Image> image();
-    public abstract Optional<Map<String, Integer>> counts();
-    public abstract Optional<Date> createdAt();
-    public abstract Optional<String> firstName();
-    public abstract Optional<String> bio();
-    public abstract Optional<String> username();
+    public abstract @Nullable @UserEmailIntervalType String emailInterval();
+    public abstract @Nullable String lastName();
+    public abstract @Nullable String identifier();
+    public abstract @Nullable Image image();
+    public abstract @Nullable Map<String, Integer> counts();
+    public abstract @Nullable Date createdAt();
+    public abstract @Nullable String firstName();
+    public abstract @Nullable String bio();
+    public abstract @Nullable String username();
     public static Builder builder() {
         return new AutoValue_User.Builder();
     }
@@ -77,15 +77,15 @@ public abstract class User {
     @AutoValue.Builder
     public abstract static class Builder {
     
-        public abstract Builder setEmailInterval(Optional<@UserEmailIntervalType String> value);
-        public abstract Builder setLastName(Optional<String> value);
-        public abstract Builder setIdentifier(Optional<String> value);
-        public abstract Builder setImage(Optional<Image> value);
-        public abstract Builder setCounts(Optional<Map<String, Integer>> value);
-        public abstract Builder setCreatedAt(Optional<Date> value);
-        public abstract Builder setFirstName(Optional<String> value);
-        public abstract Builder setBio(Optional<String> value);
-        public abstract Builder setUsername(Optional<String> value);
+        public abstract Builder setEmailInterval(@Nullable @UserEmailIntervalType String value);
+        public abstract Builder setLastName(@Nullable String value);
+        public abstract Builder setIdentifier(@Nullable String value);
+        public abstract Builder setImage(@Nullable Image value);
+        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
+        public abstract Builder setCreatedAt(@Nullable Date value);
+        public abstract Builder setFirstName(@Nullable String value);
+        public abstract Builder setBio(@Nullable String value);
+        public abstract Builder setUsername(@Nullable String value);
         public abstract Builder setEmailInterval(@UserEmailIntervalType String value);
         public abstract Builder setLastName(String value);
         public abstract Builder setIdentifier(String value);

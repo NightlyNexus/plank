@@ -10,9 +10,9 @@ package com.pinterest.models;
 
 import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
-import java.util.Optional;
-import java.util.Set;
 import java.net.URI;
+import java.util.Set;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.util.Date;
@@ -21,43 +21,43 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface PinModel {
-    Optional<String> note();
-    Optional<Map<String, String>> media();
-    Optional<Map<String, Integer>> counts();
-    Optional<String> descriptionText();
+    @Nullable String note();
+    @Nullable Map<String, String> media();
+    @Nullable Map<String, Integer> counts();
+    @Nullable String descriptionText();
     Map<String, User> creator();
-    Optional<@PinInStockType int> inStock();
-    Optional<Map<String, String>> attribution();
-    Optional<List<Map<String, Object>>> tags();
-    Optional<Map<String, Object>> visualSearchAttrs();
-    Optional<Board> board();
-    Optional<URI> link();
-    Optional<String> color();
+    @Nullable @PinInStockType int inStock();
+    @Nullable Map<String, String> attribution();
+    @Nullable List<Map<String, Object>> tags();
+    @Nullable Map<String, Object> visualSearchAttrs();
+    @Nullable Board board();
+    @Nullable URI link();
+    @Nullable String color();
     String identifier();
-    Optional<Image> image();
+    @Nullable Image image();
     Date createdAt();
-    Optional<List<PinAttributionObjects>> attributionObjects();
-    Optional<URI> url();
+    @Nullable List<PinAttributionObjects> attributionObjects();
+    @Nullable URI url();
 }
 
 public interface PinModelBuilder {
-    Builder setNote(Optional<String> value);
-    Builder setMedia(Optional<Map<String, String>> value);
-    Builder setCounts(Optional<Map<String, Integer>> value);
-    Builder setDescriptionText(Optional<String> value);
+    Builder setNote(@Nullable String value);
+    Builder setMedia(@Nullable Map<String, String> value);
+    Builder setCounts(@Nullable Map<String, Integer> value);
+    Builder setDescriptionText(@Nullable String value);
     Builder setCreator(Map<String, User> value);
-    Builder setInStock(Optional<@PinInStockType int> value);
-    Builder setAttribution(Optional<Map<String, String>> value);
-    Builder setTags(Optional<List<Map<String, Object>>> value);
-    Builder setVisualSearchAttrs(Optional<Map<String, Object>> value);
-    Builder setBoard(Optional<Board> value);
-    Builder setLink(Optional<URI> value);
-    Builder setColor(Optional<String> value);
+    Builder setInStock(@Nullable @PinInStockType int value);
+    Builder setAttribution(@Nullable Map<String, String> value);
+    Builder setTags(@Nullable List<Map<String, Object>> value);
+    Builder setVisualSearchAttrs(@Nullable Map<String, Object> value);
+    Builder setBoard(@Nullable Board value);
+    Builder setLink(@Nullable URI value);
+    Builder setColor(@Nullable String value);
     Builder setIdentifier(String value);
-    Builder setImage(Optional<Image> value);
+    Builder setImage(@Nullable Image value);
     Builder setCreatedAt(Date value);
-    Builder setAttributionObjects(Optional<List<PinAttributionObjects>> value);
-    Builder setUrl(Optional<URI> value);
+    Builder setAttributionObjects(@Nullable List<PinAttributionObjects> value);
+    Builder setUrl(@Nullable URI value);
     Builder setNote(String value);
     Builder setMedia(Map<String, String> value);
     Builder setCounts(Map<String, Integer> value);
@@ -82,23 +82,23 @@ public abstract class Pin {
     @IntDef({UNKNOWN, OUT_OF_STOCK, IN_STOCK})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PinInStockType {}
-    public abstract Optional<String> note();
-    public abstract Optional<Map<String, String>> media();
-    public abstract Optional<Map<String, Integer>> counts();
-    public abstract Optional<String> descriptionText();
+    public abstract @Nullable String note();
+    public abstract @Nullable Map<String, String> media();
+    public abstract @Nullable Map<String, Integer> counts();
+    public abstract @Nullable String descriptionText();
     public abstract Map<String, User> creator();
-    public abstract Optional<@PinInStockType int> inStock();
-    public abstract Optional<Map<String, String>> attribution();
-    public abstract Optional<List<Map<String, Object>>> tags();
-    public abstract Optional<Map<String, Object>> visualSearchAttrs();
-    public abstract Optional<Board> board();
-    public abstract Optional<URI> link();
-    public abstract Optional<String> color();
+    public abstract @Nullable @PinInStockType int inStock();
+    public abstract @Nullable Map<String, String> attribution();
+    public abstract @Nullable List<Map<String, Object>> tags();
+    public abstract @Nullable Map<String, Object> visualSearchAttrs();
+    public abstract @Nullable Board board();
+    public abstract @Nullable URI link();
+    public abstract @Nullable String color();
     public abstract String identifier();
-    public abstract Optional<Image> image();
+    public abstract @Nullable Image image();
     public abstract Date createdAt();
-    public abstract Optional<List<PinAttributionObjects>> attributionObjects();
-    public abstract Optional<URI> url();
+    public abstract @Nullable List<PinAttributionObjects> attributionObjects();
+    public abstract @Nullable URI url();
     public static Builder builder() {
         return new AutoValue_Pin.Builder();
     }
@@ -106,23 +106,23 @@ public abstract class Pin {
     @AutoValue.Builder
     public abstract static class Builder {
     
-        public abstract Builder setNote(Optional<String> value);
-        public abstract Builder setMedia(Optional<Map<String, String>> value);
-        public abstract Builder setCounts(Optional<Map<String, Integer>> value);
-        public abstract Builder setDescriptionText(Optional<String> value);
+        public abstract Builder setNote(@Nullable String value);
+        public abstract Builder setMedia(@Nullable Map<String, String> value);
+        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
+        public abstract Builder setDescriptionText(@Nullable String value);
         public abstract Builder setCreator(Map<String, User> value);
-        public abstract Builder setInStock(Optional<@PinInStockType int> value);
-        public abstract Builder setAttribution(Optional<Map<String, String>> value);
-        public abstract Builder setTags(Optional<List<Map<String, Object>>> value);
-        public abstract Builder setVisualSearchAttrs(Optional<Map<String, Object>> value);
-        public abstract Builder setBoard(Optional<Board> value);
-        public abstract Builder setLink(Optional<URI> value);
-        public abstract Builder setColor(Optional<String> value);
+        public abstract Builder setInStock(@Nullable @PinInStockType int value);
+        public abstract Builder setAttribution(@Nullable Map<String, String> value);
+        public abstract Builder setTags(@Nullable List<Map<String, Object>> value);
+        public abstract Builder setVisualSearchAttrs(@Nullable Map<String, Object> value);
+        public abstract Builder setBoard(@Nullable Board value);
+        public abstract Builder setLink(@Nullable URI value);
+        public abstract Builder setColor(@Nullable String value);
         public abstract Builder setIdentifier(String value);
-        public abstract Builder setImage(Optional<Image> value);
+        public abstract Builder setImage(@Nullable Image value);
         public abstract Builder setCreatedAt(Date value);
-        public abstract Builder setAttributionObjects(Optional<List<PinAttributionObjects>> value);
-        public abstract Builder setUrl(Optional<URI> value);
+        public abstract Builder setAttributionObjects(@Nullable List<PinAttributionObjects> value);
+        public abstract Builder setUrl(@Nullable URI value);
         public abstract Builder setNote(String value);
         public abstract Builder setMedia(Map<String, String> value);
         public abstract Builder setCounts(Map<String, Integer> value);

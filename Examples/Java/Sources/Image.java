@@ -10,9 +10,9 @@ package com.pinterest.models;
 
 import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
-import java.util.Optional;
-import java.util.Set;
 import java.net.URI;
+import java.util.Set;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.util.Date;
@@ -21,15 +21,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface ImageModel {
-    Optional<Integer> height();
-    Optional<URI> url();
-    Optional<Integer> width();
+    @Nullable Integer height();
+    @Nullable URI url();
+    @Nullable Integer width();
 }
 
 public interface ImageModelBuilder {
-    Builder setHeight(Optional<Integer> value);
-    Builder setUrl(Optional<URI> value);
-    Builder setWidth(Optional<Integer> value);
+    Builder setHeight(@Nullable Integer value);
+    Builder setUrl(@Nullable URI value);
+    Builder setWidth(@Nullable Integer value);
     Builder setHeight(Integer value);
     Builder setUrl(URI value);
     Builder setWidth(Integer value);
@@ -38,9 +38,9 @@ public interface ImageModelBuilder {
 @AutoValue
 public abstract class Image {
 
-    public abstract Optional<Integer> height();
-    public abstract Optional<URI> url();
-    public abstract Optional<Integer> width();
+    public abstract @Nullable Integer height();
+    public abstract @Nullable URI url();
+    public abstract @Nullable Integer width();
     public static Builder builder() {
         return new AutoValue_Image.Builder();
     }
@@ -48,9 +48,9 @@ public abstract class Image {
     @AutoValue.Builder
     public abstract static class Builder {
     
-        public abstract Builder setHeight(Optional<Integer> value);
-        public abstract Builder setUrl(Optional<URI> value);
-        public abstract Builder setWidth(Optional<Integer> value);
+        public abstract Builder setHeight(@Nullable Integer value);
+        public abstract Builder setUrl(@Nullable URI value);
+        public abstract Builder setWidth(@Nullable Integer value);
         public abstract Builder setHeight(Integer value);
         public abstract Builder setUrl(URI value);
         public abstract Builder setWidth(Integer value);

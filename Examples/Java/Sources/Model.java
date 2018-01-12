@@ -10,9 +10,9 @@ package com.pinterest.models;
 
 import android.support.annotation.IntDef;
 import com.google.auto.value.AutoValue;
-import java.util.Optional;
-import java.util.Set;
 import java.net.URI;
+import java.util.Set;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import java.lang.annotation.Retention;
 import java.util.Date;
@@ -21,18 +21,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface ModelModel {
-    Optional<String> identifier();
+    @Nullable String identifier();
 }
 
 public interface ModelModelBuilder {
-    Builder setIdentifier(Optional<String> value);
+    Builder setIdentifier(@Nullable String value);
     Builder setIdentifier(String value);
 }
 
 @AutoValue
 public abstract class Model {
 
-    public abstract Optional<String> identifier();
+    public abstract @Nullable String identifier();
     public static Builder builder() {
         return new AutoValue_Model.Builder();
     }
@@ -40,7 +40,7 @@ public abstract class Model {
     @AutoValue.Builder
     public abstract static class Builder {
     
-        public abstract Builder setIdentifier(Optional<String> value);
+        public abstract Builder setIdentifier(@Nullable String value);
         public abstract Builder setIdentifier(String value);
         public abstract Model build();
     
