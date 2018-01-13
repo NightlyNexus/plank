@@ -21,15 +21,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface UserModel {
-    @Nullable @UserEmailIntervalType String emailInterval();
-    @Nullable String lastName();
-    @Nullable String identifier();
-    @Nullable Image image();
-    @Nullable Map<String, Integer> counts();
-    @Nullable Date createdAt();
-    @Nullable String firstName();
-    @Nullable String bio();
-    @Nullable String username();
+    @SerializedName("email_interval") @Nullable @UserEmailIntervalType String emailInterval();
+    @SerializedName("last_name") @Nullable String lastName();
+    @SerializedName("id") @Nullable String identifier();
+    @SerializedName("image") @Nullable Image image();
+    @SerializedName("counts") @Nullable Map<String, Integer> counts();
+    @SerializedName("created_at") @Nullable Date createdAt();
+    @SerializedName("first_name") @Nullable String firstName();
+    @SerializedName("bio") @Nullable String bio();
+    @SerializedName("username") @Nullable String username();
 }
 
 public interface UserModelBuilder {
@@ -42,15 +42,6 @@ public interface UserModelBuilder {
     Builder setFirstName(@Nullable String value);
     Builder setBio(@Nullable String value);
     Builder setUsername(@Nullable String value);
-    Builder setEmailInterval(@UserEmailIntervalType String value);
-    Builder setLastName(String value);
-    Builder setIdentifier(String value);
-    Builder setImage(Image value);
-    Builder setCounts(Map<String, Integer> value);
-    Builder setCreatedAt(Date value);
-    Builder setFirstName(String value);
-    Builder setBio(String value);
-    Builder setUsername(String value);
 }
 
 @AutoValue
@@ -61,15 +52,15 @@ public abstract class User {
     @StringDef({UNSET, IMMEDIATE, DAILY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface UserEmailIntervalType {}
-    public abstract @Nullable @UserEmailIntervalType String emailInterval();
-    public abstract @Nullable String lastName();
-    public abstract @Nullable String identifier();
-    public abstract @Nullable Image image();
-    public abstract @Nullable Map<String, Integer> counts();
-    public abstract @Nullable Date createdAt();
-    public abstract @Nullable String firstName();
-    public abstract @Nullable String bio();
-    public abstract @Nullable String username();
+    public abstract @SerializedName("email_interval") @Nullable @UserEmailIntervalType String emailInterval();
+    public abstract @SerializedName("last_name") @Nullable String lastName();
+    public abstract @SerializedName("id") @Nullable String identifier();
+    public abstract @SerializedName("image") @Nullable Image image();
+    public abstract @SerializedName("counts") @Nullable Map<String, Integer> counts();
+    public abstract @SerializedName("created_at") @Nullable Date createdAt();
+    public abstract @SerializedName("first_name") @Nullable String firstName();
+    public abstract @SerializedName("bio") @Nullable String bio();
+    public abstract @SerializedName("username") @Nullable String username();
     public static Builder builder() {
         return new AutoValue_User.Builder();
     }
@@ -86,15 +77,6 @@ public abstract class User {
         public abstract Builder setFirstName(@Nullable String value);
         public abstract Builder setBio(@Nullable String value);
         public abstract Builder setUsername(@Nullable String value);
-        public abstract Builder setEmailInterval(@UserEmailIntervalType String value);
-        public abstract Builder setLastName(String value);
-        public abstract Builder setIdentifier(String value);
-        public abstract Builder setImage(Image value);
-        public abstract Builder setCounts(Map<String, Integer> value);
-        public abstract Builder setCreatedAt(Date value);
-        public abstract Builder setFirstName(String value);
-        public abstract Builder setBio(String value);
-        public abstract Builder setUsername(String value);
         public abstract User build();
     
     }

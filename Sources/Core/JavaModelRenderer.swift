@@ -34,15 +34,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let props = self.properties.map { param, schemaObj in
             JavaIR.method(modifiers, "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
         }
-        // We add a convenience setter for Optional types since AutoValue can handle both
-        // setFoo(Optional<T> value) and setFoo(T value)
-        // https://github.com/google/auto/blob/master/value/userguide/builders-howto.md#-handle-optional-properties
-        let convenienceProps = self.properties.filter { _, schemaObj in
-            return schemaObj.nullability == nil || schemaObj.nullability == .nullable
-        }.map { param, schemaObj in
-            JavaIR.method(modifiers, "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj.schema.nonnullProperty())) value)") {[]}
-        }
-        return props + convenienceProps
+        return props
     }
 
     func renderBuilderInterfaceProperties() -> [JavaIR.Method] {
@@ -51,7 +43,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
 
     func renderModelProperties(modifiers: JavaModifier = [.public, .abstract]) -> [JavaIR.Method] {
         return self.properties.map { param, schemaObj in
-            JavaIR.method(modifiers, "\(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
+            JavaIR.method(modifiers, "@SerializedName(\"\(param)\") \(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
         }
     }
 

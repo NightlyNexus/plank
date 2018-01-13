@@ -21,26 +21,23 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface ImageModel {
-    @Nullable Integer height();
-    @Nullable URI url();
-    @Nullable Integer width();
+    @SerializedName("height") @Nullable Integer height();
+    @SerializedName("url") @Nullable URI url();
+    @SerializedName("width") @Nullable Integer width();
 }
 
 public interface ImageModelBuilder {
     Builder setHeight(@Nullable Integer value);
     Builder setUrl(@Nullable URI value);
     Builder setWidth(@Nullable Integer value);
-    Builder setHeight(Integer value);
-    Builder setUrl(URI value);
-    Builder setWidth(Integer value);
 }
 
 @AutoValue
 public abstract class Image {
 
-    public abstract @Nullable Integer height();
-    public abstract @Nullable URI url();
-    public abstract @Nullable Integer width();
+    public abstract @SerializedName("height") @Nullable Integer height();
+    public abstract @SerializedName("url") @Nullable URI url();
+    public abstract @SerializedName("width") @Nullable Integer width();
     public static Builder builder() {
         return new AutoValue_Image.Builder();
     }
@@ -51,9 +48,6 @@ public abstract class Image {
         public abstract Builder setHeight(@Nullable Integer value);
         public abstract Builder setUrl(@Nullable URI value);
         public abstract Builder setWidth(@Nullable Integer value);
-        public abstract Builder setHeight(Integer value);
-        public abstract Builder setUrl(URI value);
-        public abstract Builder setWidth(Integer value);
         public abstract Image build();
     
     }

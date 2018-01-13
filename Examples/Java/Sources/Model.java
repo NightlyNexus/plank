@@ -21,18 +21,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface ModelModel {
-    @Nullable String identifier();
+    @SerializedName("id") @Nullable String identifier();
 }
 
 public interface ModelModelBuilder {
     Builder setIdentifier(@Nullable String value);
-    Builder setIdentifier(String value);
 }
 
 @AutoValue
 public abstract class Model {
 
-    public abstract @Nullable String identifier();
+    public abstract @SerializedName("id") @Nullable String identifier();
     public static Builder builder() {
         return new AutoValue_Model.Builder();
     }
@@ -41,7 +40,6 @@ public abstract class Model {
     public abstract static class Builder {
     
         public abstract Builder setIdentifier(@Nullable String value);
-        public abstract Builder setIdentifier(String value);
         public abstract Model build();
     
     }
