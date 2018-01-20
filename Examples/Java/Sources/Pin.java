@@ -20,6 +20,12 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
+public abstract class PinAttributionObjects {
+
+
+
+}
+
 public interface PinModel {
     @SerializedName("note") @Nullable String note();
     @SerializedName("media") @Nullable Map<String, String> media();

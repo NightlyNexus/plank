@@ -85,6 +85,29 @@ public struct JavaModelRenderer: JavaFileRenderer {
             }
         }
 
+        let adtRoots = self.properties.flatMap { (param, prop) -> [JavaIR.Root] in
+            switch prop.schema {
+            case .oneOf(types: let possibleTypes):
+                let objProps = possibleTypes.map { $0.nullableProperty() }
+                return adtRootsForSchema(property: param, schemas: objProps)
+            case .array(itemType: .some(let itemType)):
+                switch itemType {
+                case .oneOf(types: let possibleTypes):
+                let objProps = possibleTypes.map { $0.nullableProperty() }
+                return adtRootsForSchema(property: param, schemas: objProps)
+                default: return []
+                }
+            case .map(valueType: .some(let additionalProperties)):
+                switch additionalProperties {
+                case .oneOf(types: let possibleTypes):
+                    let objProps = possibleTypes.map { $0.nullableProperty() }
+                    return adtRootsForSchema(property: param, schemas: objProps)
+                default: return []
+                }
+            default: return []
+            }
+        }
+
         let modelInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
                 modifiers: [.public],
                 extends: nil,
@@ -135,6 +158,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
         let roots: [JavaIR.Root] =
             packages +
             imports +
+            adtRoots +
             [modelInterface, builderInterface, modelClass]
         return roots
     }

@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		817D927F2012E0860029F430 /* JavaADTRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D927E2012E0860029F430 /* JavaADTRenderer.swift */; };
 		OBJ_100 /* ObjCFileRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* ObjCFileRenderer.swift */; };
 		OBJ_101 /* ObjCModelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ObjCModelRenderer.swift */; };
 		OBJ_102 /* ObjectiveCBuilderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ObjectiveCBuilderExtension.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		817D927E2012E0860029F430 /* JavaADTRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaADTRenderer.swift; sourceTree = "<group>"; };
 		OBJ_10 /* JSADTExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSADTExtension.swift; sourceTree = "<group>"; };
 		OBJ_11 /* JSFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSFileGenerator.swift; sourceTree = "<group>"; };
 		OBJ_12 /* JSFileRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSFileRenderer.swift; sourceTree = "<group>"; };
@@ -196,7 +198,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -208,7 +210,6 @@
 				OBJ_48 /* Utility */,
 				OBJ_49 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -234,6 +235,7 @@
 				OBJ_17 /* JavaFileRenderer.swift */,
 				OBJ_18 /* JavaIR.swift */,
 				OBJ_19 /* JavaModelRenderer.swift */,
+				817D927E2012E0860029F430 /* JavaADTRenderer.swift */,
 				OBJ_20 /* ObjCADTRenderer.swift */,
 				OBJ_21 /* ObjCFileRenderer.swift */,
 				OBJ_22 /* ObjCModelRenderer.swift */,
@@ -335,7 +337,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_49 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -396,6 +398,7 @@
 				OBJ_97 /* JavaIR.swift in Sources */,
 				OBJ_98 /* JavaModelRenderer.swift in Sources */,
 				OBJ_99 /* ObjCADTRenderer.swift in Sources */,
+				817D927F2012E0860029F430 /* JavaADTRenderer.swift in Sources */,
 				OBJ_100 /* ObjCFileRenderer.swift in Sources */,
 				OBJ_101 /* ObjCModelRenderer.swift in Sources */,
 				OBJ_102 /* ObjectiveCBuilderExtension.swift in Sources */,

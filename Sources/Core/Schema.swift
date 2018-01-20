@@ -120,6 +120,10 @@ extension Schema {
     func nonnullProperty() -> SchemaObjectProperty {
         return SchemaObjectProperty(schema: self, nullability: .nonnull)
     }
+
+    func nullableProperty() -> SchemaObjectProperty {
+        return SchemaObjectProperty(schema: self, nullability: .nullable)
+    }
 }
 
 public struct SchemaObjectRoot: Equatable {
