@@ -27,43 +27,43 @@ public abstract class PinAttributionObjects {
 }
 
 public interface PinModel {
-    @SerializedName("note") @Nullable String note();
-    @SerializedName("media") @Nullable Map<String, String> media();
-    @SerializedName("counts") @Nullable Map<String, Integer> counts();
-    @SerializedName("description") @Nullable String descriptionText();
-    @SerializedName("creator") Map<String, User> creator();
-    @SerializedName("in_stock") @Nullable @PinInStockType int inStock();
     @SerializedName("attribution") @Nullable Map<String, String> attribution();
-    @SerializedName("tags") @Nullable List<Map<String, Object>> tags();
-    @SerializedName("visual_search_attrs") @Nullable Map<String, Object> visualSearchAttrs();
+    @SerializedName("attribution_objects") @Nullable List<PinAttributionObjects> attributionObjects();
     @SerializedName("board") @Nullable Board board();
-    @SerializedName("link") @Nullable URI link();
     @SerializedName("color") @Nullable String color();
+    @SerializedName("counts") @Nullable Map<String, Integer> counts();
+    @SerializedName("created_at") Date createdAt();
+    @SerializedName("creator") Map<String, User> creator();
+    @SerializedName("description") @Nullable String descriptionText();
     @SerializedName("id") String identifier();
     @SerializedName("image") @Nullable Image image();
-    @SerializedName("created_at") Date createdAt();
-    @SerializedName("attribution_objects") @Nullable List<PinAttributionObjects> attributionObjects();
+    @SerializedName("in_stock") @Nullable @PinInStockType int inStock();
+    @SerializedName("link") @Nullable URI link();
+    @SerializedName("media") @Nullable Map<String, String> media();
+    @SerializedName("note") @Nullable String note();
+    @SerializedName("tags") @Nullable List<Map<String, Object>> tags();
     @SerializedName("url") @Nullable URI url();
+    @SerializedName("visual_search_attrs") @Nullable Map<String, Object> visualSearchAttrs();
 }
 
 public interface PinModelBuilder {
-    Builder setNote(@Nullable String value);
-    Builder setMedia(@Nullable Map<String, String> value);
-    Builder setCounts(@Nullable Map<String, Integer> value);
-    Builder setDescriptionText(@Nullable String value);
-    Builder setCreator(Map<String, User> value);
-    Builder setInStock(@Nullable @PinInStockType int value);
     Builder setAttribution(@Nullable Map<String, String> value);
-    Builder setTags(@Nullable List<Map<String, Object>> value);
-    Builder setVisualSearchAttrs(@Nullable Map<String, Object> value);
+    Builder setAttributionObjects(@Nullable List<PinAttributionObjects> value);
     Builder setBoard(@Nullable Board value);
-    Builder setLink(@Nullable URI value);
     Builder setColor(@Nullable String value);
+    Builder setCounts(@Nullable Map<String, Integer> value);
+    Builder setCreatedAt(Date value);
+    Builder setCreator(Map<String, User> value);
+    Builder setDescriptionText(@Nullable String value);
     Builder setIdentifier(String value);
     Builder setImage(@Nullable Image value);
-    Builder setCreatedAt(Date value);
-    Builder setAttributionObjects(@Nullable List<PinAttributionObjects> value);
+    Builder setInStock(@Nullable @PinInStockType int value);
+    Builder setLink(@Nullable URI value);
+    Builder setMedia(@Nullable Map<String, String> value);
+    Builder setNote(@Nullable String value);
+    Builder setTags(@Nullable List<Map<String, Object>> value);
     Builder setUrl(@Nullable URI value);
+    Builder setVisualSearchAttrs(@Nullable Map<String, Object> value);
 }
 
 @AutoValue
@@ -74,23 +74,23 @@ public abstract class Pin {
     @IntDef({UNKNOWN, OUT_OF_STOCK, IN_STOCK})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PinInStockType {}
-    public abstract @SerializedName("note") @Nullable String note();
-    public abstract @SerializedName("media") @Nullable Map<String, String> media();
-    public abstract @SerializedName("counts") @Nullable Map<String, Integer> counts();
-    public abstract @SerializedName("description") @Nullable String descriptionText();
-    public abstract @SerializedName("creator") Map<String, User> creator();
-    public abstract @SerializedName("in_stock") @Nullable @PinInStockType int inStock();
     public abstract @SerializedName("attribution") @Nullable Map<String, String> attribution();
-    public abstract @SerializedName("tags") @Nullable List<Map<String, Object>> tags();
-    public abstract @SerializedName("visual_search_attrs") @Nullable Map<String, Object> visualSearchAttrs();
+    public abstract @SerializedName("attribution_objects") @Nullable List<PinAttributionObjects> attributionObjects();
     public abstract @SerializedName("board") @Nullable Board board();
-    public abstract @SerializedName("link") @Nullable URI link();
     public abstract @SerializedName("color") @Nullable String color();
+    public abstract @SerializedName("counts") @Nullable Map<String, Integer> counts();
+    public abstract @SerializedName("created_at") Date createdAt();
+    public abstract @SerializedName("creator") Map<String, User> creator();
+    public abstract @SerializedName("description") @Nullable String descriptionText();
     public abstract @SerializedName("id") String identifier();
     public abstract @SerializedName("image") @Nullable Image image();
-    public abstract @SerializedName("created_at") Date createdAt();
-    public abstract @SerializedName("attribution_objects") @Nullable List<PinAttributionObjects> attributionObjects();
+    public abstract @SerializedName("in_stock") @Nullable @PinInStockType int inStock();
+    public abstract @SerializedName("link") @Nullable URI link();
+    public abstract @SerializedName("media") @Nullable Map<String, String> media();
+    public abstract @SerializedName("note") @Nullable String note();
+    public abstract @SerializedName("tags") @Nullable List<Map<String, Object>> tags();
     public abstract @SerializedName("url") @Nullable URI url();
+    public abstract @SerializedName("visual_search_attrs") @Nullable Map<String, Object> visualSearchAttrs();
     public static Builder builder() {
         return new AutoValue_Pin.Builder();
     }
@@ -98,23 +98,23 @@ public abstract class Pin {
     @AutoValue.Builder
     public abstract static class Builder {
     
-        public abstract Builder setNote(@Nullable String value);
-        public abstract Builder setMedia(@Nullable Map<String, String> value);
-        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
-        public abstract Builder setDescriptionText(@Nullable String value);
-        public abstract Builder setCreator(Map<String, User> value);
-        public abstract Builder setInStock(@Nullable @PinInStockType int value);
         public abstract Builder setAttribution(@Nullable Map<String, String> value);
-        public abstract Builder setTags(@Nullable List<Map<String, Object>> value);
-        public abstract Builder setVisualSearchAttrs(@Nullable Map<String, Object> value);
+        public abstract Builder setAttributionObjects(@Nullable List<PinAttributionObjects> value);
         public abstract Builder setBoard(@Nullable Board value);
-        public abstract Builder setLink(@Nullable URI value);
         public abstract Builder setColor(@Nullable String value);
+        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
+        public abstract Builder setCreatedAt(Date value);
+        public abstract Builder setCreator(Map<String, User> value);
+        public abstract Builder setDescriptionText(@Nullable String value);
         public abstract Builder setIdentifier(String value);
         public abstract Builder setImage(@Nullable Image value);
-        public abstract Builder setCreatedAt(Date value);
-        public abstract Builder setAttributionObjects(@Nullable List<PinAttributionObjects> value);
+        public abstract Builder setInStock(@Nullable @PinInStockType int value);
+        public abstract Builder setLink(@Nullable URI value);
+        public abstract Builder setMedia(@Nullable Map<String, String> value);
+        public abstract Builder setNote(@Nullable String value);
+        public abstract Builder setTags(@Nullable List<Map<String, Object>> value);
         public abstract Builder setUrl(@Nullable URI value);
+        public abstract Builder setVisualSearchAttrs(@Nullable Map<String, Object> value);
         public abstract Pin build();
     
     }

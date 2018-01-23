@@ -17,14 +17,14 @@ export type UserEmailIntervalType =
 ;
 
 export type UserType = $Shape<{|
-  +email_interval: UserEmailIntervalType,
-  +last_name: ?string,
-  +id: ?string,
-  +image: ?ImageType,
+  +bio: ?string,
   +counts: ?{ +[string]: number } /* Integer */,
   +created_at: ?PlankDate,
+  +email_interval: UserEmailIntervalType,
   +first_name: ?string,
-  +bio: ?string,
+  +id: ?string,
+  +image: ?ImageType,
+  +last_name: ?string,
   +username: ?string,
 |}> & {
   id: string

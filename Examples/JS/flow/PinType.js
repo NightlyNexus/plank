@@ -21,23 +21,23 @@ export type PinInStockType =
 ;
 
 export type PinType = $Shape<{|
-  +note: ?string,
-  +media: ?{ +[string]: string },
-  +counts: ?{ +[string]: number } /* Integer */,
-  +description: ?string,
-  +creator: { +[string]: UserType },
-  +in_stock: PinInStockType,
   +attribution: ?{ +[string]: string },
-  +tags: ?Array<{}>,
-  +visual_search_attrs: ?{},
+  +attribution_objects: ?Array<PinAttributionObjectsType>,
   +board: ?BoardType,
-  +link: ?PlankURI,
   +color: ?string,
+  +counts: ?{ +[string]: number } /* Integer */,
+  +created_at: PlankDate,
+  +creator: { +[string]: UserType },
+  +description: ?string,
   +id: string,
   +image: ?ImageType,
-  +created_at: PlankDate,
-  +attribution_objects: ?Array<PinAttributionObjectsType>,
+  +in_stock: PinInStockType,
+  +link: ?PlankURI,
+  +media: ?{ +[string]: string },
+  +note: ?string,
+  +tags: ?Array<{}>,
   +url: ?PlankURI,
+  +visual_search_attrs: ?{},
 |}> & {
   id: string
 };

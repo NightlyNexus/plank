@@ -85,39 +85,12 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
         return self;
     }
         {
-            __unsafe_unretained id value = modelDictionary[@"email_interval"]; // Collection will retain.
+            __unsafe_unretained id value = modelDictionary[@"bio"]; // Collection will retain.
             if (value != nil) {
                 if (value != (id)kCFNull) {
-                    self->_emailInterval = UserEmailIntervalTypeFromString(value);
+                    self->_bio = [value copy];
                 }
-                self->_userDirtyProperties.UserDirtyPropertyEmailInterval = 1;
-            }
-        }
-        {
-            __unsafe_unretained id value = modelDictionary[@"last_name"]; // Collection will retain.
-            if (value != nil) {
-                if (value != (id)kCFNull) {
-                    self->_lastName = [value copy];
-                }
-                self->_userDirtyProperties.UserDirtyPropertyLastName = 1;
-            }
-        }
-        {
-            __unsafe_unretained id value = modelDictionary[@"id"]; // Collection will retain.
-            if (value != nil) {
-                if (value != (id)kCFNull) {
-                    self->_identifier = [value copy];
-                }
-                self->_userDirtyProperties.UserDirtyPropertyIdentifier = 1;
-            }
-        }
-        {
-            __unsafe_unretained id value = modelDictionary[@"image"]; // Collection will retain.
-            if (value != nil) {
-                if (value != (id)kCFNull) {
-                    self->_image = [Image modelObjectWithDictionary:value];
-                }
-                self->_userDirtyProperties.UserDirtyPropertyImage = 1;
+                self->_userDirtyProperties.UserDirtyPropertyBio = 1;
             }
         }
         {
@@ -139,6 +112,15 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
             }
         }
         {
+            __unsafe_unretained id value = modelDictionary[@"email_interval"]; // Collection will retain.
+            if (value != nil) {
+                if (value != (id)kCFNull) {
+                    self->_emailInterval = UserEmailIntervalTypeFromString(value);
+                }
+                self->_userDirtyProperties.UserDirtyPropertyEmailInterval = 1;
+            }
+        }
+        {
             __unsafe_unretained id value = modelDictionary[@"first_name"]; // Collection will retain.
             if (value != nil) {
                 if (value != (id)kCFNull) {
@@ -148,12 +130,30 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
             }
         }
         {
-            __unsafe_unretained id value = modelDictionary[@"bio"]; // Collection will retain.
+            __unsafe_unretained id value = modelDictionary[@"id"]; // Collection will retain.
             if (value != nil) {
                 if (value != (id)kCFNull) {
-                    self->_bio = [value copy];
+                    self->_identifier = [value copy];
                 }
-                self->_userDirtyProperties.UserDirtyPropertyBio = 1;
+                self->_userDirtyProperties.UserDirtyPropertyIdentifier = 1;
+            }
+        }
+        {
+            __unsafe_unretained id value = modelDictionary[@"image"]; // Collection will retain.
+            if (value != nil) {
+                if (value != (id)kCFNull) {
+                    self->_image = [Image modelObjectWithDictionary:value];
+                }
+                self->_userDirtyProperties.UserDirtyPropertyImage = 1;
+            }
+        }
+        {
+            __unsafe_unretained id value = modelDictionary[@"last_name"]; // Collection will retain.
+            if (value != nil) {
+                if (value != (id)kCFNull) {
+                    self->_lastName = [value copy];
+                }
+                self->_userDirtyProperties.UserDirtyPropertyLastName = 1;
             }
         }
         {
@@ -181,14 +181,14 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     if (!(self = [super init])) {
         return self;
     }
-    _emailInterval = builder.emailInterval;
-    _lastName = builder.lastName;
-    _identifier = builder.identifier;
-    _image = builder.image;
+    _bio = builder.bio;
     _counts = builder.counts;
     _createdAt = builder.createdAt;
+    _emailInterval = builder.emailInterval;
     _firstName = builder.firstName;
-    _bio = builder.bio;
+    _identifier = builder.identifier;
+    _image = builder.image;
+    _lastName = builder.lastName;
     _username = builder.username;
     _userDirtyProperties = builder.userDirtyProperties;
     if ([self class] == [User class]) {
@@ -202,17 +202,8 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     NSMutableArray *descriptionFields = [NSMutableArray arrayWithCapacity:9];
     [descriptionFields addObject:parentDebugDescription];
     struct UserDirtyProperties props = _userDirtyProperties;
-    if (props.UserDirtyPropertyEmailInterval) {
-        [descriptionFields addObject:[@"_emailInterval = " stringByAppendingFormat:@"%@", UserEmailIntervalTypeToString(_emailInterval)]];
-    }
-    if (props.UserDirtyPropertyLastName) {
-        [descriptionFields addObject:[@"_lastName = " stringByAppendingFormat:@"%@", _lastName]];
-    }
-    if (props.UserDirtyPropertyIdentifier) {
-        [descriptionFields addObject:[@"_identifier = " stringByAppendingFormat:@"%@", _identifier]];
-    }
-    if (props.UserDirtyPropertyImage) {
-        [descriptionFields addObject:[@"_image = " stringByAppendingFormat:@"%@", _image]];
+    if (props.UserDirtyPropertyBio) {
+        [descriptionFields addObject:[@"_bio = " stringByAppendingFormat:@"%@", _bio]];
     }
     if (props.UserDirtyPropertyCounts) {
         [descriptionFields addObject:[@"_counts = " stringByAppendingFormat:@"%@", _counts]];
@@ -220,11 +211,20 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     if (props.UserDirtyPropertyCreatedAt) {
         [descriptionFields addObject:[@"_createdAt = " stringByAppendingFormat:@"%@", _createdAt]];
     }
+    if (props.UserDirtyPropertyEmailInterval) {
+        [descriptionFields addObject:[@"_emailInterval = " stringByAppendingFormat:@"%@", UserEmailIntervalTypeToString(_emailInterval)]];
+    }
     if (props.UserDirtyPropertyFirstName) {
         [descriptionFields addObject:[@"_firstName = " stringByAppendingFormat:@"%@", _firstName]];
     }
-    if (props.UserDirtyPropertyBio) {
-        [descriptionFields addObject:[@"_bio = " stringByAppendingFormat:@"%@", _bio]];
+    if (props.UserDirtyPropertyIdentifier) {
+        [descriptionFields addObject:[@"_identifier = " stringByAppendingFormat:@"%@", _identifier]];
+    }
+    if (props.UserDirtyPropertyImage) {
+        [descriptionFields addObject:[@"_image = " stringByAppendingFormat:@"%@", _image]];
+    }
+    if (props.UserDirtyPropertyLastName) {
+        [descriptionFields addObject:[@"_lastName = " stringByAppendingFormat:@"%@", _lastName]];
     }
     if (props.UserDirtyPropertyUsername) {
         [descriptionFields addObject:[@"_username = " stringByAppendingFormat:@"%@", _username]];
@@ -253,13 +253,13 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     return (
         (anObject != nil) &&
         (_emailInterval == anObject.emailInterval) &&
-        (_lastName == anObject.lastName || [_lastName isEqualToString:anObject.lastName]) &&
-        (_identifier == anObject.identifier || [_identifier isEqualToString:anObject.identifier]) &&
-        (_image == anObject.image || [_image isEqual:anObject.image]) &&
+        (_bio == anObject.bio || [_bio isEqualToString:anObject.bio]) &&
         (_counts == anObject.counts || [_counts isEqualToDictionary:anObject.counts]) &&
         (_createdAt == anObject.createdAt || [_createdAt isEqualToDate:anObject.createdAt]) &&
         (_firstName == anObject.firstName || [_firstName isEqualToString:anObject.firstName]) &&
-        (_bio == anObject.bio || [_bio isEqualToString:anObject.bio]) &&
+        (_identifier == anObject.identifier || [_identifier isEqualToString:anObject.identifier]) &&
+        (_image == anObject.image || [_image isEqual:anObject.image]) &&
+        (_lastName == anObject.lastName || [_lastName isEqualToString:anObject.lastName]) &&
         (_username == anObject.username || [_username isEqualToString:anObject.username])
     );
 }
@@ -267,14 +267,14 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
 {
     NSUInteger subhashes[] = {
         17,
-        (NSUInteger)_emailInterval,
-        [_lastName hash],
-        [_identifier hash],
-        [_image hash],
+        [_bio hash],
         [_counts hash],
         [_createdAt hash],
+        (NSUInteger)_emailInterval,
         [_firstName hash],
-        [_bio hash],
+        [_identifier hash],
+        [_image hash],
+        [_lastName hash],
         [_username hash]
     };
     return PINIntegerArrayHash(subhashes, sizeof(subhashes) / sizeof(subhashes[0]));
@@ -305,23 +305,23 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     if (!(self = [super init])) {
         return self;
     }
-    _emailInterval = [aDecoder decodeIntegerForKey:@"email_interval"];
-    _lastName = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"last_name"];
-    _identifier = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"id"];
-    _image = [aDecoder decodeObjectOfClass:[Image class] forKey:@"image"];
+    _bio = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"bio"];
     _counts = [aDecoder decodeObjectOfClasses:[NSSet setWithArray:@[[NSDictionary class], [NSNumber class]]] forKey:@"counts"];
     _createdAt = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"created_at"];
+    _emailInterval = [aDecoder decodeIntegerForKey:@"email_interval"];
     _firstName = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"first_name"];
-    _bio = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"bio"];
+    _identifier = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"id"];
+    _image = [aDecoder decodeObjectOfClass:[Image class] forKey:@"image"];
+    _lastName = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"last_name"];
     _username = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"username"];
-    _userDirtyProperties.UserDirtyPropertyEmailInterval = [aDecoder decodeIntForKey:@"email_interval_dirty_property"] & 0x1;
-    _userDirtyProperties.UserDirtyPropertyLastName = [aDecoder decodeIntForKey:@"last_name_dirty_property"] & 0x1;
-    _userDirtyProperties.UserDirtyPropertyIdentifier = [aDecoder decodeIntForKey:@"id_dirty_property"] & 0x1;
-    _userDirtyProperties.UserDirtyPropertyImage = [aDecoder decodeIntForKey:@"image_dirty_property"] & 0x1;
+    _userDirtyProperties.UserDirtyPropertyBio = [aDecoder decodeIntForKey:@"bio_dirty_property"] & 0x1;
     _userDirtyProperties.UserDirtyPropertyCounts = [aDecoder decodeIntForKey:@"counts_dirty_property"] & 0x1;
     _userDirtyProperties.UserDirtyPropertyCreatedAt = [aDecoder decodeIntForKey:@"created_at_dirty_property"] & 0x1;
+    _userDirtyProperties.UserDirtyPropertyEmailInterval = [aDecoder decodeIntForKey:@"email_interval_dirty_property"] & 0x1;
     _userDirtyProperties.UserDirtyPropertyFirstName = [aDecoder decodeIntForKey:@"first_name_dirty_property"] & 0x1;
-    _userDirtyProperties.UserDirtyPropertyBio = [aDecoder decodeIntForKey:@"bio_dirty_property"] & 0x1;
+    _userDirtyProperties.UserDirtyPropertyIdentifier = [aDecoder decodeIntForKey:@"id_dirty_property"] & 0x1;
+    _userDirtyProperties.UserDirtyPropertyImage = [aDecoder decodeIntForKey:@"image_dirty_property"] & 0x1;
+    _userDirtyProperties.UserDirtyPropertyLastName = [aDecoder decodeIntForKey:@"last_name_dirty_property"] & 0x1;
     _userDirtyProperties.UserDirtyPropertyUsername = [aDecoder decodeIntForKey:@"username_dirty_property"] & 0x1;
     if ([self class] == [User class]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kPlankDidInitializeNotification object:self userInfo:@{ kPlankInitTypeKey : @(PlankModelInitTypeDefault) }];
@@ -330,23 +330,23 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
 }
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeInteger:self.emailInterval forKey:@"email_interval"];
-    [aCoder encodeObject:self.lastName forKey:@"last_name"];
-    [aCoder encodeObject:self.identifier forKey:@"id"];
-    [aCoder encodeObject:self.image forKey:@"image"];
+    [aCoder encodeObject:self.bio forKey:@"bio"];
     [aCoder encodeObject:self.counts forKey:@"counts"];
     [aCoder encodeObject:self.createdAt forKey:@"created_at"];
+    [aCoder encodeInteger:self.emailInterval forKey:@"email_interval"];
     [aCoder encodeObject:self.firstName forKey:@"first_name"];
-    [aCoder encodeObject:self.bio forKey:@"bio"];
+    [aCoder encodeObject:self.identifier forKey:@"id"];
+    [aCoder encodeObject:self.image forKey:@"image"];
+    [aCoder encodeObject:self.lastName forKey:@"last_name"];
     [aCoder encodeObject:self.username forKey:@"username"];
-    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyEmailInterval forKey:@"email_interval_dirty_property"];
-    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyLastName forKey:@"last_name_dirty_property"];
-    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyIdentifier forKey:@"id_dirty_property"];
-    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyImage forKey:@"image_dirty_property"];
+    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyBio forKey:@"bio_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyCounts forKey:@"counts_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyCreatedAt forKey:@"created_at_dirty_property"];
+    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyEmailInterval forKey:@"email_interval_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyFirstName forKey:@"first_name_dirty_property"];
-    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyBio forKey:@"bio_dirty_property"];
+    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyIdentifier forKey:@"id_dirty_property"];
+    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyImage forKey:@"image_dirty_property"];
+    [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyLastName forKey:@"last_name_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.UserDirtyPropertyUsername forKey:@"username_dirty_property"];
 }
 @end
@@ -359,17 +359,8 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
         return self;
     }
     struct UserDirtyProperties userDirtyProperties = modelObject.userDirtyProperties;
-    if (userDirtyProperties.UserDirtyPropertyEmailInterval) {
-        _emailInterval = modelObject.emailInterval;
-    }
-    if (userDirtyProperties.UserDirtyPropertyLastName) {
-        _lastName = modelObject.lastName;
-    }
-    if (userDirtyProperties.UserDirtyPropertyIdentifier) {
-        _identifier = modelObject.identifier;
-    }
-    if (userDirtyProperties.UserDirtyPropertyImage) {
-        _image = modelObject.image;
+    if (userDirtyProperties.UserDirtyPropertyBio) {
+        _bio = modelObject.bio;
     }
     if (userDirtyProperties.UserDirtyPropertyCounts) {
         _counts = modelObject.counts;
@@ -377,11 +368,20 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     if (userDirtyProperties.UserDirtyPropertyCreatedAt) {
         _createdAt = modelObject.createdAt;
     }
+    if (userDirtyProperties.UserDirtyPropertyEmailInterval) {
+        _emailInterval = modelObject.emailInterval;
+    }
     if (userDirtyProperties.UserDirtyPropertyFirstName) {
         _firstName = modelObject.firstName;
     }
-    if (userDirtyProperties.UserDirtyPropertyBio) {
-        _bio = modelObject.bio;
+    if (userDirtyProperties.UserDirtyPropertyIdentifier) {
+        _identifier = modelObject.identifier;
+    }
+    if (userDirtyProperties.UserDirtyPropertyImage) {
+        _image = modelObject.image;
+    }
+    if (userDirtyProperties.UserDirtyPropertyLastName) {
+        _lastName = modelObject.lastName;
     }
     if (userDirtyProperties.UserDirtyPropertyUsername) {
         _username = modelObject.username;
@@ -397,11 +397,20 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
 {
     NSParameterAssert(modelObject);
     UserBuilder *builder = self;
+    if (modelObject.userDirtyProperties.UserDirtyPropertyBio) {
+        builder.bio = modelObject.bio;
+    }
+    if (modelObject.userDirtyProperties.UserDirtyPropertyCounts) {
+        builder.counts = modelObject.counts;
+    }
+    if (modelObject.userDirtyProperties.UserDirtyPropertyCreatedAt) {
+        builder.createdAt = modelObject.createdAt;
+    }
     if (modelObject.userDirtyProperties.UserDirtyPropertyEmailInterval) {
         builder.emailInterval = modelObject.emailInterval;
     }
-    if (modelObject.userDirtyProperties.UserDirtyPropertyLastName) {
-        builder.lastName = modelObject.lastName;
+    if (modelObject.userDirtyProperties.UserDirtyPropertyFirstName) {
+        builder.firstName = modelObject.firstName;
     }
     if (modelObject.userDirtyProperties.UserDirtyPropertyIdentifier) {
         builder.identifier = modelObject.identifier;
@@ -418,41 +427,17 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
             builder.image = nil;
         }
     }
-    if (modelObject.userDirtyProperties.UserDirtyPropertyCounts) {
-        builder.counts = modelObject.counts;
-    }
-    if (modelObject.userDirtyProperties.UserDirtyPropertyCreatedAt) {
-        builder.createdAt = modelObject.createdAt;
-    }
-    if (modelObject.userDirtyProperties.UserDirtyPropertyFirstName) {
-        builder.firstName = modelObject.firstName;
-    }
-    if (modelObject.userDirtyProperties.UserDirtyPropertyBio) {
-        builder.bio = modelObject.bio;
+    if (modelObject.userDirtyProperties.UserDirtyPropertyLastName) {
+        builder.lastName = modelObject.lastName;
     }
     if (modelObject.userDirtyProperties.UserDirtyPropertyUsername) {
         builder.username = modelObject.username;
     }
 }
-- (void)setEmailInterval:(UserEmailIntervalType)emailInterval
+- (void)setBio:(NSString *)bio
 {
-    _emailInterval = emailInterval;
-    _userDirtyProperties.UserDirtyPropertyEmailInterval = 1;
-}
-- (void)setLastName:(NSString *)lastName
-{
-    _lastName = lastName;
-    _userDirtyProperties.UserDirtyPropertyLastName = 1;
-}
-- (void)setIdentifier:(NSString *)identifier
-{
-    _identifier = identifier;
-    _userDirtyProperties.UserDirtyPropertyIdentifier = 1;
-}
-- (void)setImage:(Image *)image
-{
-    _image = image;
-    _userDirtyProperties.UserDirtyPropertyImage = 1;
+    _bio = bio;
+    _userDirtyProperties.UserDirtyPropertyBio = 1;
 }
 - (void)setCounts:(NSDictionary<NSString *, NSNumber /* Integer */ *> *)counts
 {
@@ -464,15 +449,30 @@ extern UserEmailIntervalType UserEmailIntervalTypeFromString(NSString * _Nonnull
     _createdAt = createdAt;
     _userDirtyProperties.UserDirtyPropertyCreatedAt = 1;
 }
+- (void)setEmailInterval:(UserEmailIntervalType)emailInterval
+{
+    _emailInterval = emailInterval;
+    _userDirtyProperties.UserDirtyPropertyEmailInterval = 1;
+}
 - (void)setFirstName:(NSString *)firstName
 {
     _firstName = firstName;
     _userDirtyProperties.UserDirtyPropertyFirstName = 1;
 }
-- (void)setBio:(NSString *)bio
+- (void)setIdentifier:(NSString *)identifier
 {
-    _bio = bio;
-    _userDirtyProperties.UserDirtyPropertyBio = 1;
+    _identifier = identifier;
+    _userDirtyProperties.UserDirtyPropertyIdentifier = 1;
+}
+- (void)setImage:(Image *)image
+{
+    _image = image;
+    _userDirtyProperties.UserDirtyPropertyImage = 1;
+}
+- (void)setLastName:(NSString *)lastName
+{
+    _lastName = lastName;
+    _userDirtyProperties.UserDirtyPropertyLastName = 1;
 }
 - (void)setUsername:(NSString *)username
 {

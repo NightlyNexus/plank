@@ -21,37 +21,37 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
 public interface BoardModel {
-    @SerializedName("name") @Nullable String name();
-    @SerializedName("image") Image image();
+    @SerializedName("contributors") @Nullable Set<User> contributors();
     @SerializedName("counts") @Nullable Map<String, Integer> counts();
     @SerializedName("created_at") @Nullable Date createdAt();
-    @SerializedName("contributors") @Nullable Set<User> contributors();
-    @SerializedName("description") @Nullable String descriptionText();
     @SerializedName("creator") @Nullable Map<String, String> creator();
+    @SerializedName("description") @Nullable String descriptionText();
+    @SerializedName("image") Image image();
+    @SerializedName("name") @Nullable String name();
     @SerializedName("url") @Nullable URI url();
 }
 
 public interface BoardModelBuilder {
-    Builder setName(@Nullable String value);
-    Builder setImage(Image value);
+    Builder setContributors(@Nullable Set<User> value);
     Builder setCounts(@Nullable Map<String, Integer> value);
     Builder setCreatedAt(@Nullable Date value);
-    Builder setContributors(@Nullable Set<User> value);
-    Builder setDescriptionText(@Nullable String value);
     Builder setCreator(@Nullable Map<String, String> value);
+    Builder setDescriptionText(@Nullable String value);
+    Builder setImage(Image value);
+    Builder setName(@Nullable String value);
     Builder setUrl(@Nullable URI value);
 }
 
 @AutoValue
 public abstract class Board implements ModelModel {
 
-    public abstract @SerializedName("name") @Nullable String name();
-    public abstract @SerializedName("image") Image image();
+    public abstract @SerializedName("contributors") @Nullable Set<User> contributors();
     public abstract @SerializedName("counts") @Nullable Map<String, Integer> counts();
     public abstract @SerializedName("created_at") @Nullable Date createdAt();
-    public abstract @SerializedName("contributors") @Nullable Set<User> contributors();
-    public abstract @SerializedName("description") @Nullable String descriptionText();
     public abstract @SerializedName("creator") @Nullable Map<String, String> creator();
+    public abstract @SerializedName("description") @Nullable String descriptionText();
+    public abstract @SerializedName("image") Image image();
+    public abstract @SerializedName("name") @Nullable String name();
     public abstract @SerializedName("url") @Nullable URI url();
     public static Builder builder() {
         return new AutoValue_Board.Builder();
@@ -60,13 +60,13 @@ public abstract class Board implements ModelModel {
     @AutoValue.Builder
     public abstract static class Builder implements ModelModelBuilder {
     
-        public abstract Builder setName(@Nullable String value);
-        public abstract Builder setImage(Image value);
+        public abstract Builder setContributors(@Nullable Set<User> value);
         public abstract Builder setCounts(@Nullable Map<String, Integer> value);
         public abstract Builder setCreatedAt(@Nullable Date value);
-        public abstract Builder setContributors(@Nullable Set<User> value);
-        public abstract Builder setDescriptionText(@Nullable String value);
         public abstract Builder setCreator(@Nullable Map<String, String> value);
+        public abstract Builder setDescriptionText(@Nullable String value);
+        public abstract Builder setImage(Image value);
+        public abstract Builder setName(@Nullable String value);
         public abstract Builder setUrl(@Nullable URI value);
         public abstract Board build();
     
