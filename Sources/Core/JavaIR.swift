@@ -13,13 +13,15 @@ struct JavaModifier: OptionSet {
     static let abstract = JavaModifier(rawValue: 1 << 1)
     static let final = JavaModifier(rawValue: 1 << 2)
     static let `static` = JavaModifier(rawValue: 1 << 3)
+    static let `private` = JavaModifier(rawValue: 1 << 4)
 
     func render() -> String {
         return [
-            self.contains(.public) ? "public" : "",
+            self.contains(.`public`) ? "public" : "",
             self.contains(.abstract) ? "abstract" : "",
-            self.contains(.static) ? "static" : "",
-            self.contains(.final) ? "final" : ""
+            self.contains(.`static`) ? "static" : "",
+            self.contains(.final) ? "final" : "",
+            self.contains(.`private`) ? "private" : ""
         ].filter { $0 != "" }.joined(separator: " ")
     }
 }

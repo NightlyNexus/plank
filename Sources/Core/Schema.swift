@@ -133,7 +133,6 @@ public struct SchemaObjectRoot: Equatable {
     let algebraicTypeIdentifier: String?
 
     var typeIdentifier: String {
-
         return algebraicTypeIdentifier ?? name
     }
 }

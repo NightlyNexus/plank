@@ -20,9 +20,17 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public abstract class PinAttributionObjects {
+interface PinAttributionObjectsMatcher<R> {
+    R match(@Nullable Board);
+    R match(@Nullable User);
+}
 
+public abstract class PinAttributionObjects<R> {
 
+    private PinAttributionObjects() {
+    
+    }
+    public abstract R match PinAttributionObjects(PinAttributionObjectsMatcher<R>);
 
 }
 
