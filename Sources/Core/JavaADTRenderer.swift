@@ -39,10 +39,10 @@ extension JavaModelRenderer {
                          name: "\(formattedADTName)Matcher<R>",
             methods: interfaceMethods())
 
-        let matcherMethod = JavaIR.method([.public, .abstract], "R match \(formattedADTName)(\(formattedADTName)Matcher<R>)") {[]}
+        let matcherMethod = JavaIR.method([.public], "R match \(formattedADTName)(\(formattedADTName)Matcher<R>)") {[]}
 
         let cls = JavaIR.Class(annotations: [],
-                     modifiers: [.public, .abstract],
+                     modifiers: [.public, .final],
                      extends: nil,
                      implements: nil,
                      name: "\(formattedADTName)<R>",

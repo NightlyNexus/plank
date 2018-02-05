@@ -33,21 +33,15 @@ public interface ImageModelBuilder {
 }
 
 @AutoValue
-public abstract class Image {
+public abstract class Image implements ImageModel {
 
-    public abstract @SerializedName("height") @Nullable Integer height();
-    public abstract @SerializedName("url") @Nullable URI url();
-    public abstract @SerializedName("width") @Nullable Integer width();
     public static Builder builder() {
         return new AutoValue_Image.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract static class Builder {
+    public abstract static class Builder implements ImageModelBuilder {
     
-        public abstract Builder setHeight(@Nullable Integer value);
-        public abstract Builder setUrl(@Nullable URI value);
-        public abstract Builder setWidth(@Nullable Integer value);
         public abstract Image build();
     
     }

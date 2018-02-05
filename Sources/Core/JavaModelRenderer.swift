@@ -110,7 +110,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
 
         let modelInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
                 modifiers: [.public],
-                extends: nil,
+                extends: self.interfaceName(self.parentDescriptor),
                 name: self.interfaceName(),
                 methods: self.renderInterfaceProperties()
             )
@@ -118,7 +118,7 @@ public struct JavaModelRenderer: JavaFileRenderer {
 
         let builderInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
             modifiers: [.public],
-            extends: nil,
+            extends: self.builderInterfaceName(self.parentDescriptor),
             name: self.builderInterfaceName(),
             methods: self.renderBuilderInterfaceProperties()
             )
@@ -128,9 +128,9 @@ public struct JavaModelRenderer: JavaFileRenderer {
             annotations: ["AutoValue.Builder"],
             modifiers: [.public, .abstract, .static],
             extends: nil,
-            implements: self.builderInterfaceName(self.parentDescriptor).map { [$0] },
+            implements: [self.builderInterfaceName()],
             name: "Builder",
-            methods: self.renderBuilderProperties() + [
+            methods: [
                 self.renderBuilderBuild()
             ],
             enums: [],
@@ -142,9 +142,9 @@ public struct JavaModelRenderer: JavaFileRenderer {
                 annotations: ["AutoValue"],
                 modifiers: [.public, .abstract],
                 extends: nil,
-                implements: self.interfaceName(self.parentDescriptor).map { [$0] },
+                implements: [self.interfaceName()],
                 name: self.className,
-                methods: self.renderModelProperties() + [
+                methods: [
                     self.renderBuilder(),
                     self.renderToBuilder()
                 ],

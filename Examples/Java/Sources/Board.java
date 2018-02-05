@@ -43,31 +43,15 @@ public interface BoardModelBuilder {
 }
 
 @AutoValue
-public abstract class Board implements ModelModel {
+public abstract class Board implements BoardModel {
 
-    public abstract @SerializedName("contributors") @Nullable Set<User> contributors();
-    public abstract @SerializedName("counts") @Nullable Map<String, Integer> counts();
-    public abstract @SerializedName("created_at") @Nullable Date createdAt();
-    public abstract @SerializedName("creator") @Nullable Map<String, String> creator();
-    public abstract @SerializedName("description") @Nullable String descriptionText();
-    public abstract @SerializedName("image") Image image();
-    public abstract @SerializedName("name") @Nullable String name();
-    public abstract @SerializedName("url") @Nullable URI url();
     public static Builder builder() {
         return new AutoValue_Board.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract static class Builder implements ModelModelBuilder {
+    public abstract static class Builder implements BoardModelBuilder {
     
-        public abstract Builder setContributors(@Nullable Set<User> value);
-        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
-        public abstract Builder setCreatedAt(@Nullable Date value);
-        public abstract Builder setCreator(@Nullable Map<String, String> value);
-        public abstract Builder setDescriptionText(@Nullable String value);
-        public abstract Builder setImage(Image value);
-        public abstract Builder setName(@Nullable String value);
-        public abstract Builder setUrl(@Nullable URI value);
         public abstract Board build();
     
     }
