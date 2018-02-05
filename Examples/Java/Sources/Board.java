@@ -45,12 +45,14 @@ public interface BoardModelBuilder {
 @AutoValue
 public abstract class Board implements BoardModel {
 
+
     public static Builder builder() {
         return new AutoValue_Board.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract static class Builder implements BoardModelBuilder {
+    
     
         public abstract Board build();
     

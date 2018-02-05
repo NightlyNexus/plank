@@ -49,6 +49,15 @@ public struct JavaIR {
         }
     }
 
+    public struct Property {
+        let modifiers: JavaModifier
+        let type: String
+        let name: String
+        func render() -> String {
+            return "\(modifiers.render()) \(type) \(name);"
+        }
+    }
+
     static func method(annotations: Set<String> = [], _ modifiers: JavaModifier, _ signature: String, body: () -> [String]) -> JavaIR.Method {
         return JavaIR.Method(annotations: annotations, modifiers: modifiers, body: body(), signature: signature)
     }
@@ -97,6 +106,7 @@ public struct JavaIR {
         let methods: [JavaIR.Method]
         let enums: [Enum]
         let innerClasses: [JavaIR.Class]
+        let properties: [JavaIR.Property]
 
         func render() -> [String] {
             let implementsList = implements?.joined(separator: ", ") ?? ""
@@ -104,6 +114,7 @@ public struct JavaIR {
             return annotations.map { "@\($0)" } + [
                 "\(modifiers.render()) class \(name) \(implementsStmt) {",
                 -->enums.flatMap { $0.render() },
+                -->properties.map { $0.render() },
                 -->methods.flatMap { $0.render() },
                 -->innerClasses.flatMap { $0.render() },
                 "}"

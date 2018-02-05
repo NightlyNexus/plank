@@ -26,7 +26,14 @@ interface PinAttributionObjectsMatcher<R> {
 }
 
 public final class PinAttributionObjects<R> {
-
+    public static final int BOARD = 0;
+    public static final int USER = 1;
+    @IntDef({BOARD, USER})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface InternalStorage {}
+    private @Nullable Board value0;
+    private @Nullable User value1;
+    private @InternalStorage int internalStorage;
     private PinAttributionObjects() {
     
     }
@@ -84,12 +91,14 @@ public abstract class Pin implements PinModel {
     @IntDef({UNKNOWN, OUT_OF_STOCK, IN_STOCK})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PinInStockType {}
+
     public static Builder builder() {
         return new AutoValue_Pin.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract static class Builder implements PinModelBuilder {
+    
     
         public abstract Pin build();
     

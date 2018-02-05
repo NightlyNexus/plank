@@ -134,7 +134,8 @@ public struct JavaModelRenderer: JavaFileRenderer {
                 self.renderBuilderBuild()
             ],
             enums: [],
-            innerClasses: []
+            innerClasses: [],
+            properties: []
         )
 
         let modelClass = JavaIR.Root.classDecl(
@@ -151,7 +152,8 @@ public struct JavaModelRenderer: JavaFileRenderer {
                 enums: enumProps,
                 innerClasses: [
                     builderClass
-                ]
+                ],
+                properties: []
             )
         )
 

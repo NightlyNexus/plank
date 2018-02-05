@@ -52,12 +52,14 @@ public abstract class User implements UserModel {
     @StringDef({UNSET, IMMEDIATE, DAILY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface UserEmailIntervalType {}
+
     public static Builder builder() {
         return new AutoValue_User.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract static class Builder implements UserModelBuilder {
+    
     
         public abstract User build();
     

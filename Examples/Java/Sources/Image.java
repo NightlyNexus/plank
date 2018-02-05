@@ -35,12 +35,14 @@ public interface ImageModelBuilder {
 @AutoValue
 public abstract class Image implements ImageModel {
 
+
     public static Builder builder() {
         return new AutoValue_Image.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract static class Builder implements ImageModelBuilder {
+    
     
         public abstract Image build();
     

@@ -41,6 +41,17 @@ extension JavaModelRenderer {
 
         let matcherMethod = JavaIR.method([.public], "R match \(formattedADTName)(\(formattedADTName)Matcher<R>)") {[]}
 
+        let internalProperties = schemas.enumerated()
+            .map { (typeFromSchema("", $0.element), $0.offset) }
+            .map { JavaIR.Property(modifiers: [.private], type: $0.0, name: "value\($0.1)") }
+
+        let enumOptions = schemas.enumerated()
+            .map { (typeFromSchema("", $0.element.schema.nonnullProperty()), $0.offset) }
+            .map { EnumValue<Int>(defaultValue: $0.1, description: $0.0) }
+
+        let internalStorageEnum = JavaIR.Enum(name: "InternalStorage", values: .integer(enumOptions))
+
+        let internalStorageProp = JavaIR.Property(modifiers: [.private], type: "@InternalStorage int", name: "internalStorage")
         let cls = JavaIR.Class(annotations: [],
                      modifiers: [.public, .final],
                      extends: nil,
@@ -50,8 +61,9 @@ extension JavaModelRenderer {
                         privateInit,
                         matcherMethod
                      ],
-                     enums: [],
-                     innerClasses: [])
+                     enums: [internalStorageEnum],
+                     innerClasses: [],
+                     properties: internalProperties + [internalStorageProp])
         return [
             // Interface
             JavaIR.Root.interfaceDecl(aInterface: matcherInterface),

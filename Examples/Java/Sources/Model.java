@@ -31,12 +31,14 @@ public interface ModelModelBuilder {
 @AutoValue
 public abstract class Model implements ModelModel {
 
+
     public static Builder builder() {
         return new AutoValue_Model.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
     public abstract static class Builder implements ModelModelBuilder {
+    
     
         public abstract Model build();
     
