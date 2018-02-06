@@ -20,7 +20,7 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface BoardModel {
+public interface BoardModel extends ModelModel {
     @SerializedName("contributors") @Nullable Set<User> contributors();
     @SerializedName("counts") @Nullable Map<String, Integer> counts();
     @SerializedName("created_at") @Nullable Date createdAt();
@@ -31,7 +31,7 @@ public interface BoardModel {
     @SerializedName("url") @Nullable URI url();
 }
 
-public interface BoardModelBuilder {
+public interface BoardModelBuilder extends ModelModelBuilder {
     Builder setContributors(@Nullable Set<User> value);
     Builder setCounts(@Nullable Map<String, Integer> value);
     Builder setCreatedAt(@Nullable Date value);

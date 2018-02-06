@@ -129,8 +129,9 @@ public struct JavaIR {
         let methods: [JavaIR.Method]
 
         func render() -> [String] {
+            let extendsStmt = extends.map { "extends \($0) " } ?? ""
             return [
-                "\(modifiers.render()) interface \(name) {",
+                "\(modifiers.render()) interface \(name) \(extendsStmt){",
                 -->methods.flatMap { "\($0.signature);" },
                 "}"
             ]
