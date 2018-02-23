@@ -20,32 +20,8 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface UserModel {
-    @SerializedName("bio") @Nullable String bio();
-    @SerializedName("counts") @Nullable Map<String, Integer> counts();
-    @SerializedName("created_at") @Nullable Date createdAt();
-    @SerializedName("email_interval") @Nullable @UserEmailIntervalType String emailInterval();
-    @SerializedName("first_name") @Nullable String firstName();
-    @SerializedName("id") @Nullable String identifier();
-    @SerializedName("image") @Nullable Image image();
-    @SerializedName("last_name") @Nullable String lastName();
-    @SerializedName("username") @Nullable String username();
-}
-
-public interface UserModelBuilder {
-    Builder setBio(@Nullable String value);
-    Builder setCounts(@Nullable Map<String, Integer> value);
-    Builder setCreatedAt(@Nullable Date value);
-    Builder setEmailInterval(@Nullable @UserEmailIntervalType String value);
-    Builder setFirstName(@Nullable String value);
-    Builder setIdentifier(@Nullable String value);
-    Builder setImage(@Nullable Image value);
-    Builder setLastName(@Nullable String value);
-    Builder setUsername(@Nullable String value);
-}
-
 @AutoValue
-public abstract class User implements UserModel {
+public abstract class User {
     public static final String UNSET = "unset";
     public static final String IMMEDIATE = "immediate";
     public static final String DAILY = "daily";
@@ -53,14 +29,32 @@ public abstract class User implements UserModel {
     @Retention(RetentionPolicy.SOURCE)
     public @interface UserEmailIntervalType {}
 
+    public abstract @SerializedName("bio") @Nullable String bio();
+    public abstract @SerializedName("counts") @Nullable Map<String, Integer> counts();
+    public abstract @SerializedName("created_at") @Nullable Date createdAt();
+    public abstract @SerializedName("email_interval") @Nullable @UserEmailIntervalType String emailInterval();
+    public abstract @SerializedName("first_name") @Nullable String firstName();
+    public abstract @SerializedName("id") @Nullable String identifier();
+    public abstract @SerializedName("image") @Nullable Image image();
+    public abstract @SerializedName("last_name") @Nullable String lastName();
+    public abstract @SerializedName("username") @Nullable String username();
     public static Builder builder() {
         return new AutoValue_User.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract static class Builder implements UserModelBuilder {
+    public abstract static class Builder {
     
     
+        public abstract Builder setBio(@Nullable String value);
+        public abstract Builder setCounts(@Nullable Map<String, Integer> value);
+        public abstract Builder setCreatedAt(@Nullable Date value);
+        public abstract Builder setEmailInterval(@Nullable @UserEmailIntervalType String value);
+        public abstract Builder setFirstName(@Nullable String value);
+        public abstract Builder setIdentifier(@Nullable String value);
+        public abstract Builder setImage(@Nullable Image value);
+        public abstract Builder setLastName(@Nullable String value);
+        public abstract Builder setUsername(@Nullable String value);
         public abstract User build();
     
     }

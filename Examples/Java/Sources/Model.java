@@ -20,26 +20,20 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface ModelModel {
-    @SerializedName("id") @Nullable String identifier();
-}
-
-public interface ModelModelBuilder {
-    Builder setIdentifier(@Nullable String value);
-}
-
 @AutoValue
-public abstract class Model implements ModelModel {
+public abstract class Model {
 
 
+    public abstract @SerializedName("id") @Nullable String identifier();
     public static Builder builder() {
         return new AutoValue_Model.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract static class Builder implements ModelModelBuilder {
+    public abstract static class Builder {
     
     
+        public abstract Builder setIdentifier(@Nullable String value);
         public abstract Model build();
     
     }

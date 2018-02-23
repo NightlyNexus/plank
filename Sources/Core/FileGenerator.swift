@@ -50,6 +50,27 @@ protocol FileRenderer {
     func renderRoots() -> [Root]
 }
 
+extension SchemaObjectRoot {
+    func sortedProperties(transitive: Bool = false) -> [(Parameter, SchemaObjectProperty)] {
+
+        let currentPairs = self.properties.map { $0 }.sorted(by: { (obj1, obj2) -> Bool in
+            return obj1.0 < obj2.0
+        })
+
+        if transitive, let parentSchema = self.extends.flatMap({ $0.force() }) {
+            switch parentSchema {
+            case .object(let root):
+                return root.sortedProperties(transitive: transitive) + currentPairs
+            default:
+                // This state should be invalid but need to look into it.
+                return []
+            }
+        } else {
+            return currentPairs
+        }
+    }
+}
+
 extension FileRenderer {
     var className: String {
         return self.rootSchema.className(with: self.params)
@@ -59,10 +80,12 @@ extension FileRenderer {
         return self.rootSchema.extends.flatMap { $0.force() }
     }
 
+    var transitiveProperties: [(Parameter, SchemaObjectProperty)] {
+        return self.rootSchema.sortedProperties(transitive: true)
+    }
+
     var properties: [(Parameter, SchemaObjectProperty)] {
-        return self.rootSchema.properties.map { $0 }.sorted(by: { (obj1, obj2) -> Bool in
-            return obj1.0 < obj2.0
-        })
+        return self.rootSchema.sortedProperties()
     }
 
     var isBaseClass: Bool {

@@ -20,30 +20,24 @@ import java.util.List;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 
-public interface ImageModel {
-    @SerializedName("height") @Nullable Integer height();
-    @SerializedName("url") @Nullable URI url();
-    @SerializedName("width") @Nullable Integer width();
-}
-
-public interface ImageModelBuilder {
-    Builder setHeight(@Nullable Integer value);
-    Builder setUrl(@Nullable URI value);
-    Builder setWidth(@Nullable Integer value);
-}
-
 @AutoValue
-public abstract class Image implements ImageModel {
+public abstract class Image {
 
 
+    public abstract @SerializedName("height") @Nullable Integer height();
+    public abstract @SerializedName("url") @Nullable URI url();
+    public abstract @SerializedName("width") @Nullable Integer width();
     public static Builder builder() {
         return new AutoValue_Image.Builder();
     }
     abstract Builder toBuilder();
     @AutoValue.Builder
-    public abstract static class Builder implements ImageModelBuilder {
+    public abstract static class Builder {
     
     
+        public abstract Builder setHeight(@Nullable Integer value);
+        public abstract Builder setUrl(@Nullable URI value);
+        public abstract Builder setWidth(@Nullable Integer value);
         public abstract Image build();
     
     }

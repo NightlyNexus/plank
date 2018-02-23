@@ -31,24 +31,16 @@ public struct JavaModelRenderer: JavaFileRenderer {
     }
 
     func renderBuilderProperties(modifiers: JavaModifier = [.public, .abstract]) -> [JavaIR.Method] {
-        let props = self.properties.map { param, schemaObj in
+        let props = self.transitiveProperties.map { param, schemaObj in
             JavaIR.method(modifiers, "Builder set\(param.snakeCaseToCamelCase())(\(self.typeFromSchema(param, schemaObj)) value)") {[]}
         }
         return props
     }
 
-    func renderBuilderInterfaceProperties() -> [JavaIR.Method] {
-        return self.renderBuilderProperties(modifiers: [])
-    }
-
     func renderModelProperties(modifiers: JavaModifier = [.public, .abstract]) -> [JavaIR.Method] {
-        return self.properties.map { param, schemaObj in
+        return self.transitiveProperties.map { param, schemaObj in
             JavaIR.method(modifiers, "@SerializedName(\"\(param)\") \(self.typeFromSchema(param, schemaObj)) \(param.snakeCaseToPropertyName())()") {[]}
         }
-    }
-
-    func renderInterfaceProperties() -> [JavaIR.Method] {
-        return self.renderModelProperties(modifiers: [])
     }
 
     func renderRoots() -> [JavaIR.Root] {
@@ -108,29 +100,13 @@ public struct JavaModelRenderer: JavaFileRenderer {
             }
         }
 
-        let modelInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
-                modifiers: [.public],
-                extends: self.interfaceName(self.parentDescriptor),
-                name: self.interfaceName(),
-                methods: self.renderInterfaceProperties()
-            )
-        )
-
-        let builderInterface = JavaIR.Root.interfaceDecl(aInterface: JavaIR.Interface(
-            modifiers: [.public],
-            extends: self.builderInterfaceName(self.parentDescriptor),
-            name: self.builderInterfaceName(),
-            methods: self.renderBuilderInterfaceProperties()
-            )
-        )
-
         let builderClass = JavaIR.Class(
             annotations: ["AutoValue.Builder"],
             modifiers: [.public, .abstract, .static],
             extends: nil,
-            implements: [self.builderInterfaceName()],
+            implements: nil,
             name: "Builder",
-            methods: [
+            methods: self.renderBuilderProperties() + [
                 self.renderBuilderBuild()
             ],
             enums: [],
@@ -143,9 +119,9 @@ public struct JavaModelRenderer: JavaFileRenderer {
                 annotations: ["AutoValue"],
                 modifiers: [.public, .abstract],
                 extends: nil,
-                implements: [self.interfaceName()],
+                implements: nil,
                 name: self.className,
-                methods: [
+                methods: self.renderModelProperties() + [
                     self.renderBuilder(),
                     self.renderToBuilder()
                 ],
@@ -161,7 +137,8 @@ public struct JavaModelRenderer: JavaFileRenderer {
             packages +
             imports +
             adtRoots +
-            [modelInterface, builderInterface, modelClass]
+            [ modelClass ]
+
         return roots
     }
 }
